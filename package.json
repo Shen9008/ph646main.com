@@ -1,0 +1,22 @@
+{
+  "name": "ph646main-website",
+  "version": "1.0.0",
+  "description": "PH646 Philippines - Online Casino & Sports Betting (ph646main.com)",
+  "scripts": {
+    "deploy": "npx wrangler pages deploy . --project-name=ph646main",
+    "deploy:pages": "npx wrangler pages deploy . --project-name=ph646main",
+    "convert-visuals": "node scripts/convert-visuals-to-webp.js"
+  },
+  "keywords": [
+    "PH646",
+    "ph646main",
+    "casino",
+    "sports-betting",
+    "philippines"
+  ],
+  "author": "",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "sharp": "^0.34.5"
+  }
+}

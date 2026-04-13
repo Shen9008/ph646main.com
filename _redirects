@@ -1,0 +1,73 @@
+# Canonical URL normalization - prevent "Page with redirect" / "Redirect error" in Google
+# All canonicals use trailing slash. Redirect non-canonical variants to canonical (301).
+
+# Root index.html
+/index.html / 301
+
+# Trailing slash - URLs without trailing slash redirect to canonical with slash
+/slots /slots/ 301
+/live-casino /live-casino/ 301
+/sports-betting /sports-betting/ 301
+/promotions /promotions/ 301
+/about-us /about-us/ 301
+/help-center /help-center/ 301
+/responsible-gambling /responsible-gambling/ 301
+/terms-conditions /terms-conditions/ 301
+/table-games /table-games/ 301
+/news /news/ 301
+
+# Directory index.html - prevent duplicate content (same page served at /path and /path/index.html)
+/slots/index.html /slots/ 301
+/live-casino/index.html /live-casino/ 301
+/sports-betting/index.html /sports-betting/ 301
+/promotions/index.html /promotions/ 301
+/about-us/index.html /about-us/ 301
+/help-center/index.html /help-center/ 301
+/responsible-gambling/index.html /responsible-gambling/ 301
+/terms-conditions/index.html /terms-conditions/ 301
+/table-games/index.html /table-games/ 301
+/news/index.html /news/ 301
+/news/*/index.html /news/:splat/ 301
+
+# News articles - trailing slash (no slash to canonical with slash)
+/news/best-online-casinos-australia-2025 /news/best-online-casinos-australia-2025/ 301
+/news/online-pokies-australia-guide /news/online-pokies-australia-guide/ 301
+/news/live-casino-australia-guide /news/live-casino-australia-guide/ 301
+/news/sports-betting-australia-guide /news/sports-betting-australia-guide/ 301
+/news/casino-bonuses-australia-explained /news/casino-bonuses-australia-explained/ 301
+/news/safe-online-gambling-australia /news/safe-online-gambling-australia/ 301
+/news/responsible-gambling-australia /news/responsible-gambling-australia/ 301
+/news/deposit-methods-australia-casino /news/deposit-methods-australia-casino/ 301
+/news/withdrawal-guide-australia-online-casino /news/withdrawal-guide-australia-online-casino/ 301
+/news/nrl-betting-guide-australia /news/nrl-betting-guide-australia/ 301
+/news/afl-betting-tips-australia /news/afl-betting-tips-australia/ 301
+/news/pokies-vs-online-slots /news/pokies-vs-online-slots/ 301
+/news/slot-rtp-explained-australia /news/slot-rtp-explained-australia/ 301
+/news/welcome-bonus-casino-australia /news/welcome-bonus-casino-australia/ 301
+/news/mobile-casino-australia-guide /news/mobile-casino-australia-guide/ 301
+
+# Old .html URLs (flat files) to extensionless canonical
+/slots.html /slots/ 301
+/live-casino.html /live-casino/ 301
+/sports-betting.html /sports-betting/ 301
+/promotions.html /promotions/ 301
+/about-us.html /about-us/ 301
+/help-center.html /help-center/ 301
+/responsible-gambling.html /responsible-gambling/ 301
+/terms-conditions.html /terms-conditions/ 301
+/table-games.html /table-games/ 301
+/news/best-online-casinos-australia-2025.html /news/best-online-casinos-australia-2025/ 301
+/news/online-pokies-australia-guide.html /news/online-pokies-australia-guide/ 301
+/news/live-casino-australia-guide.html /news/live-casino-australia-guide/ 301
+/news/sports-betting-australia-guide.html /news/sports-betting-australia-guide/ 301
+/news/casino-bonuses-australia-explained.html /news/casino-bonuses-australia-explained/ 301
+/news/safe-online-gambling-australia.html /news/safe-online-gambling-australia/ 301
+/news/responsible-gambling-australia.html /news/responsible-gambling-australia/ 301
+/news/deposit-methods-australia-casino.html /news/deposit-methods-australia-casino/ 301
+/news/withdrawal-guide-australia-online-casino.html /news/withdrawal-guide-australia-online-casino/ 301
+/news/nrl-betting-guide-australia.html /news/nrl-betting-guide-australia/ 301
+/news/afl-betting-tips-australia.html /news/afl-betting-tips-australia/ 301
+/news/pokies-vs-online-slots.html /news/pokies-vs-online-slots/ 301
+/news/slot-rtp-explained-australia.html /news/slot-rtp-explained-australia/ 301
+/news/welcome-bonus-casino-australia.html /news/welcome-bonus-casino-australia/ 301
+/news/mobile-casino-australia-guide.html /news/mobile-casino-australia-guide/ 301

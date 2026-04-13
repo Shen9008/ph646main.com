@@ -1,0 +1,26 @@
+{
+  "main": {
+    "title": "Join PH646 at ph646main.com – Claim Your Welcome Bonus Today",
+    "subtitle": "Sign up now and get a match bonus + free spins on selected slots. New players only. T&Cs apply.",
+    "ctaText": "Sign Up & Play Now",
+    "ctaUrl": "/promotions/"
+  },
+  "slots": {
+    "title": "Spin PH646 Slots – Play 500+ Games with Bonus",
+    "subtitle": "Use your welcome bonus on Gates of Olympus, Sweet Bonanza and more. Join PH646 today.",
+    "ctaText": "Play Slots Now",
+    "ctaUrl": "/slots/"
+  },
+  "live": {
+    "title": "Live Casino at PH646 – Real Dealers, Real Wins",
+    "subtitle": "Join live blackjack, roulette and baccarat tables. Exclusive live casino bonus for new members.",
+    "ctaText": "Enter Live Casino",
+    "ctaUrl": "/live-casino/"
+  },
+  "sports": {
+    "title": "PH646 Sports – Odds on PBA, NBA, EPL & More",
+    "subtitle": "Bet on Premier League, PBA, NBA, UFC and 30+ sports. Claim your sports welcome bonus.",
+    "ctaText": "Bet Now",
+    "ctaUrl": "/sports-betting/"
+  }
+}

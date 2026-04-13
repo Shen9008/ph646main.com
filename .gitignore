@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Environment and secrets (never commit API tokens)
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.idea/
+.vscode/
+*.swp
+*.swo

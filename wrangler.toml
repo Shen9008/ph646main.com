@@ -1,0 +1,5 @@
+# Cloudflare Pages configuration for PH646 (ph646main.com)
+# Deploy with: npm run deploy
+name = "ph646main"
+compatibility_date = "2024-01-01"
+pages_build_output_dir = "."

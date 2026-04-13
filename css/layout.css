@@ -1,0 +1,805 @@
+/* PH646 Philippines - Complete Layout Redesign
+   Bento grid + Sidebar navigation
+   Different from any standard casino layout
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+    --bg-base: #0a0e14;
+    --bg-elevated: #12171f;
+    --bg-card: #1a2029;
+    --bg-card-hover: #232b36;
+    --accent: #ff6b4a;
+    --accent-soft: #ff8a6f;
+    --accent-gold: #ffc857;
+    --text: #f0f2f5;
+    --text-dim: #9ca3af;
+    --text-muted: #6b7280;
+    --border: rgba(255,255,255,0.06);
+    --radius: 16px;
+    --radius-lg: 24px;
+    --radius-xl: 32px;
+}
+
+/* Layout shell - body class layout-v2 */
+body.layout-v2 {
+    font-family: 'Outfit', -apple-system, sans-serif;
+    background: var(--bg-base);
+    color: var(--text);
+}
+body.layout-v2 main,
+body.layout-v2 .footer {
+    margin-left: 260px;
+}
+@media (max-width: 1023px) {
+    body.layout-v2 main,
+    body.layout-v2 .footer {
+        margin-left: 0;
+    }
+}
+
+/* Sidebar - fixed left nav (override style.css), white background for clear logo & text visibility */
+body.layout-v2 aside.sidebar,
+body.layout-v2 .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 260px;
+    background: #1a2029 !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1.5rem 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0;
+    margin-bottom: 0;
+}
+body.layout-v2 .sidebar__logo {
+    padding: 0 1.5rem 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 1.5rem;
+}
+body.layout-v2 .sidebar__logo a {
+    color: #ffffff;
+    text-decoration: none;
+}
+body.layout-v2 .sidebar__logo img {
+    height: 36px;
+}
+body.layout-v2 .sidebar__logo span {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 1px;
+    margin-top: 2px;
+}
+body.layout-v2 .sidebar__nav {
+    flex: 1;
+    padding: 0 0.75rem;
+}
+body.layout-v2 .sidebar__link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    border-radius: var(--radius);
+    margin-bottom: 0.25rem;
+    transition: all 0.2s;
+}
+body.layout-v2 .sidebar__link:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+}
+body.layout-v2 .sidebar__link--active {
+    color: var(--accent);
+    background: rgba(255, 107, 74, 0.12);
+}
+body.layout-v2 .sidebar__cta {
+    margin: 1rem 1rem 0;
+    padding: 1rem;
+    background: linear-gradient(135deg, var(--accent) 0%, #e55a3a 100%);
+    color: #fff;
+    text-align: center;
+    font-weight: 700;
+    font-size: 0.875rem;
+    border-radius: var(--radius);
+    text-decoration: none;
+    display: block;
+}
+body.layout-v2 .sidebar__cta:hover {
+    opacity: 0.95;
+    color: #fff;
+}
+
+/* Mobile: hide sidebar, show top bar */
+.sidebar-toggle {
+    display: none;
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 101;
+    width: 48px;
+    height: 48px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+}
+@media (max-width: 1023px) {
+    body.layout-v2 .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s;
+    }
+    body.layout-v2 .sidebar.open {
+        transform: translateX(0);
+    }
+    .sidebar-toggle { display: flex; }
+    .main-wrap { margin-left: 0 !important; padding-top: 80px; }
+}
+
+/* Main content area */
+.main-wrap {
+    flex: 1;
+    margin-left: 260px;
+    min-height: 100vh;
+    background: var(--bg-base);
+}
+
+/* Bento grid - home hero */
+.bento {
+    padding: 2rem 1.5rem 3rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+.bento__grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto auto;
+    grid-template-areas:
+        "hero hero hero sports"
+        "hero hero hero sports"
+        "slots live jackpot jackpot";
+}
+@media (max-width: 1200px) {
+    .bento__grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "hero hero"
+            "sports slots"
+            "live jackpot";
+    }
+}
+@media (max-width: 640px) {
+    .bento__grid {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "hero"
+            "sports"
+            "slots"
+            "live"
+            "jackpot";
+    }
+}
+.bento__tile {
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 180px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+.bento__tile:hover {
+    transform: scale(1.02);
+}
+.bento__tile--hero {
+    grid-area: hero;
+    min-height: 320px;
+    background: linear-gradient(135deg, #1a2029 0%, #0f1419 100%);
+    border: 1px solid var(--border);
+}
+.bento__tile--hero > * {
+    position: relative;
+    z-index: 2;
+}
+.bento__tile--hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60%;
+    height: 100%;
+    background: radial-gradient(ellipse at right, rgba(255, 107, 74, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+}
+.bento__tile--sports {
+    grid-area: sports;
+    background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.4) 100%), url('../images/home/home-sports.webp') center/cover;
+    border: 1px solid rgba(45, 212, 191, 0.2);
+}
+.bento__tile--slots {
+    grid-area: slots;
+    background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.4) 100%), url('../images/home/home-slots.webp') center/cover;
+    border: 1px solid rgba(168, 85, 247, 0.2);
+}
+.bento__tile--live {
+    grid-area: live;
+    background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.4) 100%), url('../images/home/home-live-casino.webp') center/cover;
+    border: 1px solid rgba(34, 197, 94, 0.2);
+}
+.bento__tile--jackpot {
+    grid-area: jackpot;
+    background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.4) 100%), url('../images/home/home-jackpot.webp') center/cover;
+    border: 1px solid rgba(251, 191, 36, 0.3);
+}
+.bento__label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-dim);
+    margin-bottom: 0.5rem;
+}
+.bento__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+}
+.bento__desc {
+    font-size: 0.875rem;
+    color: var(--text-dim);
+    margin-bottom: 1rem;
+}
+.bento__action {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--accent);
+}
+.bento__tile--hero .bento__title { font-size: 2.25rem; }
+.bento__tile--hero .bento__desc { font-size: 1rem; max-width: 400px; }
+@media (min-width: 768px) {
+    .bento__tile--hero .bento__title { font-size: 2.75rem; }
+}
+
+/* Section blocks */
+.block {
+    padding: 3rem 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+.block--alt {
+    background: var(--bg-elevated);
+}
+.block__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+.block__sub {
+    font-size: 0.9375rem;
+    color: var(--text-dim);
+    margin-bottom: 2rem;
+}
+
+/* Tile grid for games */
+.tile-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+}
+.tile {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: all 0.2s;
+}
+.tile:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+.tile__img {
+    aspect-ratio: 16/10;
+    overflow: hidden;
+}
+.tile__img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.tile__body {
+    padding: 1rem;
+}
+.tile__title {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+.tile__meta {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* Odds row */
+.odds-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+.odds-row__league {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+}
+.odds-row__date {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-left: 0.5rem;
+    font-weight: 500;
+}
+.odds-row__match {
+    font-size: 0.9375rem;
+}
+.odds-row__odds {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--accent-gold);
+}
+
+/* Hero Banner - layout for inserting hero images (slots, sports, live-casino, table-games, promotions) */
+.hero-banner {
+    position: relative;
+    min-height: 420px;
+    display: flex;
+    align-items: center;
+    padding: 4rem 2rem 5rem;
+    overflow: hidden;
+}
+.hero-banner__bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-elevated) 100%);
+    background-size: cover;
+    background-position: center;
+}
+.hero-banner__bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.hero-banner__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(10, 14, 20, 0.92) 0%, rgba(10, 14, 20, 0.75) 100%);
+    pointer-events: none;
+}
+.hero-banner__content {
+    position: relative;
+    z-index: 2;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+.hero-banner__content .breadcrumbs {
+    margin-bottom: 1.5rem;
+}
+.hero-banner__badge {
+    display: inline-block;
+    padding: 0.4rem 0.9rem;
+    background: rgba(255, 107, 74, 0.25);
+    color: var(--accent);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: var(--radius);
+    margin-bottom: 1.25rem;
+}
+.hero-banner__title {
+    font-size: 2.25rem;
+    font-weight: 800;
+    margin-bottom: 1.25rem;
+    color: #fff;
+    line-height: 1.2;
+}
+.hero-banner__lead {
+    font-size: 1.125rem;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 560px;
+    margin-bottom: 2rem;
+    line-height: 1.65;
+}
+.hero-banner__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+@media (min-width: 768px) {
+    .hero-banner {
+        min-height: 520px;
+        padding: 5rem 2.5rem 6rem;
+    }
+    .hero-banner__title {
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
+    }
+    .hero-banner__lead {
+        font-size: 1.25rem;
+        margin-bottom: 2.25rem;
+    }
+}
+
+/* Breadcrumbs inside hero-banner - ensure visibility */
+.hero-banner .breadcrumbs a {
+    color: rgba(255, 255, 255, 0.85);
+}
+.hero-banner .breadcrumbs a:hover {
+    color: #fff;
+}
+.hero-banner .breadcrumbs__sep {
+    color: rgba(255, 255, 255, 0.5);
+}
+.hero-banner .breadcrumbs span:last-child {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Sparkling effect overlay - hero banners */
+.hero-banner::after,
+section.hero::after,
+.bento__tile--hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background-image:
+        radial-gradient(circle 2px at 12% 22%, rgba(255,255,255,0.95) 0%, transparent 100%),
+        radial-gradient(circle 2px at 88% 18%, rgba(255,255,255,0.85) 0%, transparent 100%),
+        radial-gradient(circle 2px at 42% 68%, rgba(255,255,255,0.9) 0%, transparent 100%),
+        radial-gradient(circle 2px at 72% 78%, rgba(255,255,255,0.75) 0%, transparent 100%),
+        radial-gradient(circle 2px at 22% 52%, rgba(255,255,255,0.8) 0%, transparent 100%),
+        radial-gradient(circle 2px at 94% 48%, rgba(255,255,255,0.7) 0%, transparent 100%),
+        radial-gradient(circle 2px at 6% 88%, rgba(255,255,255,0.85) 0%, transparent 100%),
+        radial-gradient(circle 2px at 58% 8%, rgba(255,255,255,0.75) 0%, transparent 100%),
+        radial-gradient(circle 2px at 35% 92%, rgba(255,255,255,0.7) 0%, transparent 100%),
+        radial-gradient(circle 2px at 78% 65%, rgba(255,255,255,0.8) 0%, transparent 100%),
+        radial-gradient(circle 1.5px at 28% 38%, rgba(255,200,100,0.9) 0%, transparent 100%),
+        radial-gradient(circle 1.5px at 65% 35%, rgba(255,255,255,0.85) 0%, transparent 100%),
+        radial-gradient(circle 1.5px at 15% 72%, rgba(255,220,150,0.8) 0%, transparent 100%),
+        radial-gradient(circle 1.5px at 85% 82%, rgba(255,255,255,0.75) 0%, transparent 100%),
+        radial-gradient(circle 1.5px at 50% 45%, rgba(255,200,120,0.85) 0%, transparent 100%);
+    animation: sparkleTwinkle 3.5s ease-in-out infinite;
+}
+@keyframes sparkleTwinkle {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .hero-banner::after,
+    section.hero::after,
+    .bento__tile--hero::after {
+        animation: none;
+        opacity: 0.7;
+    }
+}
+
+/* Hero banner animations - Ken Burns background + content entrance */
+.hero-banner__bg {
+    animation: heroBgZoom 18s ease-in-out infinite alternate;
+    will-change: transform;
+}
+@keyframes heroBgZoom {
+    from { transform: scale(1); }
+    to { transform: scale(1.06); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .hero-banner__bg { animation: none; }
+}
+.hero-banner__badge,
+.hero-banner__title,
+.hero-banner__lead,
+.hero-banner__actions {
+    opacity: 0;
+    animation: heroContentIn 0.7s ease-out forwards;
+}
+.hero-banner__badge { animation-delay: 0.1s; }
+.hero-banner__title { animation-delay: 0.25s; }
+.hero-banner__lead { animation-delay: 0.4s; }
+.hero-banner__actions { animation-delay: 0.55s; }
+.hero-banner .breadcrumbs {
+    opacity: 0;
+    animation: heroContentIn 0.6s ease-out 0.05s forwards;
+}
+@keyframes heroContentIn {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Section.hero (news, about, help-center, etc.) - content entrance */
+section.hero .hero__badge,
+section.hero .hero__title,
+section.hero .hero__subtitle {
+    opacity: 0;
+    animation: heroContentIn 0.7s ease-out forwards;
+}
+section.hero .hero__badge { animation-delay: 0.1s; }
+section.hero .hero__title { animation-delay: 0.25s; }
+section.hero .hero__subtitle { animation-delay: 0.4s; }
+section.hero .hero__subtitle:nth-of-type(2) { animation-delay: 0.5s; }
+
+/* Bento hero tile - enhanced entrance (uses data-animate + fade-in, add scale) */
+.bento__tile--hero.fade-in {
+    animation: bentoHeroIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes bentoHeroIn {
+    from { opacity: 0; transform: translateY(20px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Hero section (news/blog) - full-width with padding */
+section.hero {
+    position: relative;
+    min-height: 280px;
+    padding: 4rem 2rem 5rem;
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-elevated);
+}
+section.hero .container {
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+@media (min-width: 768px) {
+    section.hero {
+        min-height: 340px;
+        padding: 5rem 2.5rem 6rem;
+    }
+}
+
+/* Page head - fallback/compact (used when hero-banner not needed) */
+.page-head {
+    padding: 2rem 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+.page-head__title {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+}
+.page-head__lead {
+    font-size: 1rem;
+    color: var(--text-dim);
+    max-width: 500px;
+}
+
+/* Content area */
+.content-area {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1.5rem 3rem;
+}
+.content-area p {
+    color: var(--text-dim);
+    margin-bottom: 1rem;
+    line-height: 1.7;
+}
+.content-area a {
+    color: var(--accent);
+}
+.content-area a:hover {
+    color: var(--accent-soft);
+}
+
+/* Buttons - layout theme */
+body.layout-v2 .btn--primary {
+    background: linear-gradient(135deg, var(--accent) 0%, #e55a3a 100%);
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-decoration: none;
+    display: inline-block;
+}
+body.layout-v2 .btn--outline {
+    background: transparent;
+    color: var(--accent);
+    border: 2px solid var(--accent);
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-decoration: none;
+    display: inline-block;
+}
+body.layout-v2 .btn--outline:hover {
+    background: rgba(255, 107, 74, 0.1);
+}
+
+/* Footer - layout theme */
+body.layout-v2 .footer {
+    background: var(--bg-elevated);
+    border-top: 1px solid var(--border);
+}
+body.layout-v2 .footer a:hover {
+    color: var(--accent) !important;
+}
+.footer__trust-link {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.footer__trust-link:hover {
+    color: var(--accent) !important;
+}
+
+/* News/Blog - layout with content sidebar */
+.layout-with-sidebar {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+}
+@media (min-width: 1024px) {
+    .layout-with-sidebar {
+        grid-template-columns: 1fr 280px;
+        align-items: start;
+    }
+}
+.layout-main {
+    min-width: 0;
+}
+.blog-sidebar {
+    position: relative;
+    padding: 1.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    flex-shrink: 0;
+}
+.blog-sidebar__block {
+    margin-bottom: 1.5rem;
+}
+.blog-sidebar__block:last-child {
+    margin-bottom: 0;
+}
+.blog-sidebar__title {
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-dim);
+    margin-bottom: 0.75rem;
+}
+.blog-sidebar__list {
+    list-style: none;
+}
+.blog-sidebar__list li {
+    margin-bottom: 0.5rem;
+}
+.blog-sidebar__list a {
+    color: var(--text-dim);
+    font-size: 0.9375rem;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.blog-sidebar__list a:hover {
+    color: var(--accent);
+}
+.blog-sidebar__block--promo {
+    padding: 1rem;
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.15) 0%, rgba(0,0,0,0.3) 100%);
+    border-color: rgba(124, 58, 237, 0.3);
+}
+.blog-sidebar__block--promo .blog-sidebar__title {
+    color: #a78bfa;
+}
+.blog-sidebar__block--bcgame {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(0,0,0,0.3) 100%) !important;
+    border-color: rgba(34, 197, 94, 0.3) !important;
+}
+.blog-sidebar__block--bcgame .blog-sidebar__title {
+    color: #22c55e !important;
+}
+.blog-sidebar__text {
+    font-size: 0.9375rem;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+}
+
+/* News/Blog - layout-v2 article cards alignment */
+body.layout-v2 .cards-grid {
+    align-items: stretch;
+}
+body.layout-v2 .cards-grid > a {
+    display: block;
+    min-height: 100%;
+}
+body.layout-v2 .news-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+}
+body.layout-v2 .news-card__image {
+    flex-shrink: 0;
+}
+body.layout-v2 .news-card__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+body.layout-v2 .news-card__excerpt {
+    flex: 1;
+}
+body.layout-v2 .news-card__category {
+    color: var(--accent);
+}
+body.layout-v2 .news-card__title {
+    color: var(--text);
+}
+body.layout-v2 .blog-article {
+    padding: 2rem 1.5rem;
+}
+body.layout-v2 .blog-article__header {
+    margin-bottom: 2rem;
+}
+body.layout-v2 .blog-article__content h2 {
+    font-size: 1.35rem;
+    margin: 2rem 0 1rem;
+    color: var(--text);
+}
+body.layout-v2 .blog-article__content p {
+    color: var(--text-dim);
+    line-height: 1.75;
+}
+
+/* CTA banner - layout theme (overridden by .playamo-banner) */
+body.layout-v2 .cta-banner__inner {
+    background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-elevated) 100%);
+    border-color: var(--accent);
+}
+body.layout-v2 .cta-banner__btn {
+    background: linear-gradient(135deg, var(--accent) 0%, #e55a3a 100%) !important;
+    color: #fff !important;
+}
+
+/* Playamo bento hero tile - purple gradient */
+body.layout-v2 .bento__tile--playamo {
+    background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 100%), url('../images/home/home-free-spins.webp') center/cover !important;
+    border-color: rgba(124, 58, 237, 0.4) !important;
+}
+body.layout-v2 .bento__tile--playamo::before {
+    background: radial-gradient(ellipse at right, rgba(167, 139, 250, 0.2) 0%, transparent 70%) !important;
+}
+body.layout-v2 .bento__tile--playamo .bento__label { color: #a78bfa; }
+body.layout-v2 .bento__tile--playamo .bento__action { color: #22c55e; }
