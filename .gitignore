@@ -10,6 +10,9 @@ node_modules/
 .DS_Store
 Thumbs.db
 
+# Cloudflare Wrangler local cache
+.wrangler/
+
 # Editor
 .idea/
 .vscode/

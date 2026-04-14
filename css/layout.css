@@ -1,33 +1,91 @@
-/* PH646 Philippines - Complete Layout Redesign
-   Bento grid + Sidebar navigation
-   Different from any standard casino layout
-*/
+/* PH646 — Yellow / white / dark grey + sparkling background */
 
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-    --bg-base: #0a0e14;
-    --bg-elevated: #12171f;
-    --bg-card: #1a2029;
-    --bg-card-hover: #232b36;
-    --accent: #ff6b4a;
-    --accent-soft: #ff8a6f;
-    --accent-gold: #ffc857;
-    --text: #f0f2f5;
-    --text-dim: #9ca3af;
-    --text-muted: #6b7280;
-    --border: rgba(255,255,255,0.06);
+    --bg-base: #141418;
+    --bg-elevated: #1e1e24;
+    --bg-card: #2a2a32;
+    --bg-card-hover: #34343e;
+    --accent: #e6b800;
+    --accent-soft: #ffeb3b;
+    --accent-gold: #ffd54f;
+    --accent-deep: #b8960a;
+    --text: #ffffff;
+    --text-dim: #d0d0d8;
+    --text-muted: #9a9aa8;
+    --border: rgba(255, 255, 255, 0.08);
     --radius: 16px;
     --radius-lg: 24px;
     --radius-xl: 32px;
 }
 
-/* Layout shell - body class layout-v2 */
+/* Layout shell — dark grey base + animated sparkle field behind content */
 body.layout-v2 {
     font-family: 'Outfit', -apple-system, sans-serif;
-    background: var(--bg-base);
+    background: transparent;
     color: var(--text);
+    position: relative;
+    min-height: 100vh;
 }
+
+body.layout-v2::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-color: var(--bg-base);
+    /* First layers paint on top: sparkles above dark base gradient (last = bottom) */
+    background-image:
+        radial-gradient(1.5px 1.5px at 10% 15%, rgba(255, 255, 255, 0.55) 50%, transparent 50%),
+        radial-gradient(1px 1px at 25% 40%, rgba(255, 224, 100, 0.55) 50%, transparent 50%),
+        radial-gradient(1.5px 1.5px at 48% 12%, rgba(255, 255, 255, 0.45) 50%, transparent 50%),
+        radial-gradient(1px 1px at 72% 32%, rgba(255, 235, 150, 0.5) 50%, transparent 50%),
+        radial-gradient(1.5px 1.5px at 90% 18%, rgba(255, 255, 255, 0.5) 50%, transparent 50%),
+        radial-gradient(1px 1px at 14% 68%, rgba(255, 255, 255, 0.4) 50%, transparent 50%),
+        radial-gradient(1.5px 1.5px at 36% 85%, rgba(255, 214, 80, 0.55) 50%, transparent 50%),
+        radial-gradient(1px 1px at 58% 58%, rgba(255, 255, 255, 0.38) 50%, transparent 50%),
+        radial-gradient(1.5px 1.5px at 82% 72%, rgba(255, 255, 255, 0.48) 50%, transparent 50%),
+        radial-gradient(1px 1px at 94% 88%, rgba(255, 220, 120, 0.45) 50%, transparent 50%),
+        radial-gradient(1.5px 1.5px at 6% 52%, rgba(255, 255, 255, 0.42) 50%, transparent 50%),
+        radial-gradient(1px 1px at 33% 28%, rgba(255, 235, 180, 0.45) 50%, transparent 50%),
+        radial-gradient(1.5px 1.5px at 66% 48%, rgba(255, 255, 255, 0.4) 50%, transparent 50%),
+        radial-gradient(1px 1px at 50% 92%, rgba(255, 214, 80, 0.42) 50%, transparent 50%),
+        linear-gradient(180deg, #222228 0%, #18181e 45%, #121218 100%);
+    background-repeat: no-repeat;
+    background-size: auto;
+    animation: ph646SparkleField 6s ease-in-out infinite alternate;
+}
+
+@keyframes ph646SparkleField {
+    0% {
+        opacity: 1;
+        filter: brightness(1) saturate(1);
+    }
+    50% {
+        opacity: 0.9;
+        filter: brightness(1.12) saturate(1.15);
+    }
+    100% {
+        opacity: 1;
+        filter: brightness(1) saturate(1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body.layout-v2::before {
+        animation: none;
+        opacity: 0.95;
+    }
+}
+
+body.layout-v2 #main-content,
+body.layout-v2 .footer {
+    position: relative;
+    z-index: 1;
+}
+
 body.layout-v2 main,
 body.layout-v2 .footer {
     margin-left: 260px;
@@ -47,7 +105,7 @@ body.layout-v2 .sidebar {
     top: 0;
     bottom: 0;
     width: 260px;
-    background: #1a2029 !important;
+    background: var(--bg-card) !important;
     border-right: 1px solid rgba(255, 255, 255, 0.1);
     padding: 1.5rem 0;
     z-index: 100;
@@ -98,14 +156,14 @@ body.layout-v2 .sidebar__link:hover {
     background: rgba(255, 255, 255, 0.1);
 }
 body.layout-v2 .sidebar__link--active {
-    color: var(--accent);
-    background: rgba(255, 107, 74, 0.12);
+    color: var(--accent-soft);
+    background: rgba(230, 184, 0, 0.15);
 }
 body.layout-v2 .sidebar__cta {
     margin: 1rem 1rem 0;
     padding: 1rem;
-    background: linear-gradient(135deg, var(--accent) 0%, #e55a3a 100%);
-    color: #fff;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
+    color: #141418;
     text-align: center;
     font-weight: 700;
     font-size: 0.875rem;
@@ -115,7 +173,7 @@ body.layout-v2 .sidebar__cta {
 }
 body.layout-v2 .sidebar__cta:hover {
     opacity: 0.95;
-    color: #fff;
+    color: #141418;
 }
 
 /* Mobile: hide sidebar, show top bar */
@@ -210,8 +268,8 @@ body.layout-v2 .sidebar__cta:hover {
 .bento__tile--hero {
     grid-area: hero;
     min-height: 320px;
-    background: linear-gradient(135deg, #1a2029 0%, #0f1419 100%);
-    border: 1px solid var(--border);
+    background: linear-gradient(135deg, #2a2a32 0%, #1a1a20 100%);
+    border: 1px solid rgba(230, 184, 0, 0.25);
 }
 .bento__tile--hero > * {
     position: relative;
@@ -224,28 +282,28 @@ body.layout-v2 .sidebar__cta:hover {
     right: 0;
     width: 60%;
     height: 100%;
-    background: radial-gradient(ellipse at right, rgba(255, 107, 74, 0.15) 0%, transparent 70%);
+    background: radial-gradient(ellipse at right, rgba(230, 184, 0, 0.15) 0%, transparent 70%);
     pointer-events: none;
 }
 .bento__tile--sports {
     grid-area: sports;
     background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.4) 100%), url('../images/home/home-sports.webp') center/cover;
-    border: 1px solid rgba(45, 212, 191, 0.2);
+    border: 1px solid rgba(230, 184, 0, 0.25);
 }
 .bento__tile--slots {
     grid-area: slots;
     background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.4) 100%), url('../images/home/home-slots.webp') center/cover;
-    border: 1px solid rgba(168, 85, 247, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.12);
 }
 .bento__tile--live {
     grid-area: live;
     background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.4) 100%), url('../images/home/home-live-casino.webp') center/cover;
-    border: 1px solid rgba(34, 197, 94, 0.2);
+    border: 1px solid rgba(230, 184, 0, 0.25);
 }
 .bento__tile--jackpot {
     grid-area: jackpot;
     background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.4) 100%), url('../images/home/home-jackpot.webp') center/cover;
-    border: 1px solid rgba(251, 191, 36, 0.3);
+    border: 1px solid rgba(255, 235, 150, 0.35);
 }
 .bento__label {
     font-size: 0.7rem;
@@ -394,7 +452,7 @@ body.layout-v2 .sidebar__cta:hover {
 .hero-banner__overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(10, 14, 20, 0.92) 0%, rgba(10, 14, 20, 0.75) 100%);
+    background: linear-gradient(135deg, rgba(20, 20, 24, 0.94) 0%, rgba(18, 18, 22, 0.78) 100%);
     pointer-events: none;
 }
 .hero-banner__content {
@@ -410,8 +468,8 @@ body.layout-v2 .sidebar__cta:hover {
 .hero-banner__badge {
     display: inline-block;
     padding: 0.4rem 0.9rem;
-    background: rgba(255, 107, 74, 0.25);
-    color: var(--accent);
+    background: rgba(230, 184, 0, 0.2);
+    color: var(--accent-soft);
     font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
@@ -618,8 +676,8 @@ section.hero .container {
 
 /* Buttons - layout theme */
 body.layout-v2 .btn--primary {
-    background: linear-gradient(135deg, var(--accent) 0%, #e55a3a 100%);
-    color: #fff;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
+    color: #141418;
     border: none;
     padding: 0.75rem 1.5rem;
     border-radius: var(--radius);
@@ -640,7 +698,11 @@ body.layout-v2 .btn--outline {
     display: inline-block;
 }
 body.layout-v2 .btn--outline:hover {
-    background: rgba(255, 107, 74, 0.1);
+    background: rgba(230, 184, 0, 0.12);
+}
+body.layout-v2 .btn--primary:hover {
+    filter: brightness(1.08);
+    color: #141418;
 }
 
 /* Footer - layout theme */
@@ -716,18 +778,18 @@ body.layout-v2 .footer a:hover {
 }
 .blog-sidebar__block--promo {
     padding: 1rem;
-    background: linear-gradient(135deg, rgba(124, 58, 237, 0.15) 0%, rgba(0,0,0,0.3) 100%);
-    border-color: rgba(124, 58, 237, 0.3);
+    background: linear-gradient(135deg, rgba(230, 184, 0, 0.12) 0%, rgba(0,0,0,0.4) 100%);
+    border-color: rgba(230, 184, 0, 0.35);
 }
 .blog-sidebar__block--promo .blog-sidebar__title {
-    color: #a78bfa;
+    color: var(--accent-soft);
 }
 .blog-sidebar__block--bcgame {
-    background: linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(0,0,0,0.3) 100%) !important;
-    border-color: rgba(34, 197, 94, 0.3) !important;
+    background: linear-gradient(135deg, rgba(230, 184, 0, 0.14) 0%, rgba(0,0,0,0.35) 100%) !important;
+    border-color: rgba(255, 235, 150, 0.35) !important;
 }
 .blog-sidebar__block--bcgame .blog-sidebar__title {
-    color: #22c55e !important;
+    color: var(--accent-soft) !important;
 }
 .blog-sidebar__text {
     font-size: 0.9375rem;
@@ -789,17 +851,17 @@ body.layout-v2 .cta-banner__inner {
     border-color: var(--accent);
 }
 body.layout-v2 .cta-banner__btn {
-    background: linear-gradient(135deg, var(--accent) 0%, #e55a3a 100%) !important;
-    color: #fff !important;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%) !important;
+    color: #141418 !important;
 }
 
-/* Playamo bento hero tile - purple gradient */
+/* Hero promo tile — gold + dark grey */
 body.layout-v2 .bento__tile--playamo {
-    background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 100%), url('../images/home/home-free-spins.webp') center/cover !important;
-    border-color: rgba(124, 58, 237, 0.4) !important;
+    background: linear-gradient(135deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.5) 100%), url('../images/home/home-free-spins.webp') center/cover !important;
+    border-color: rgba(230, 184, 0, 0.35) !important;
 }
 body.layout-v2 .bento__tile--playamo::before {
-    background: radial-gradient(ellipse at right, rgba(167, 139, 250, 0.2) 0%, transparent 70%) !important;
+    background: radial-gradient(ellipse at right, rgba(255, 235, 150, 0.18) 0%, transparent 70%) !important;
 }
-body.layout-v2 .bento__tile--playamo .bento__label { color: #a78bfa; }
-body.layout-v2 .bento__tile--playamo .bento__action { color: #22c55e; }
+body.layout-v2 .bento__tile--playamo .bento__label { color: var(--accent-soft); }
+body.layout-v2 .bento__tile--playamo .bento__action { color: var(--accent-gold); }
