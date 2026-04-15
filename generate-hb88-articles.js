@@ -14,7 +14,7 @@ function createPH646Article(num, title, slug, category, keywords, description, c
     <meta name="keywords" content="${keywords}">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://PH646aus.net/news/${slug}.html">
-    <link rel="icon" href="../images/logo_favicon.png">
+    <link rel="icon" href="../images/placeholder-favicon.svg" type="image/svg+xml">
     <meta property="og:title" content="${title}">
     <meta property="og:type" content="article">
     <meta property="article:published_time" content="2025-02-03">

@@ -122,17 +122,44 @@ body.layout-v2 .sidebar__logo {
 body.layout-v2 .sidebar__logo a {
     color: #ffffff;
     text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
-body.layout-v2 .sidebar__logo img {
-    height: 36px;
+body.layout-v2 .site-logo-placeholder {
+    display: block;
+    width: 100%;
+    max-width: 160px;
+    height: 40px;
+    border: 2px dashed rgba(255, 255, 255, 0.22);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.03);
+    box-sizing: border-box;
 }
-body.layout-v2 .sidebar__logo span {
+body.layout-v2 .site-logo-title {
+    display: block;
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+}
+body.layout-v2 .site-logo-tag {
     display: block;
     font-size: 0.7rem;
     font-weight: 600;
     color: var(--accent);
     letter-spacing: 1px;
-    margin-top: 2px;
+    margin-top: 0;
+}
+body.layout-v2 .site-logo-placeholder--footer {
+    max-width: none;
+    width: 36px;
+    height: 32px;
+    flex-shrink: 0;
+}
+body.layout-v2 .site-logo-title--footer {
+    font-size: 1.125rem;
+    font-weight: 800;
 }
 body.layout-v2 .sidebar__nav {
     flex: 1;
