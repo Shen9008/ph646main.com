@@ -17,19 +17,28 @@
         return html;
     }
 
+    /**
+     * VS Code Live Server / npm live-server inject `<!-- Code injected ... --><script>...</script>`
+     * into every HTML response, including `fetch('partials/header.html')`. Partials are not full
+     * documents, so the injector often lands inside inline SVG and breaks the tree; an unclosed
+     * script makes the parser swallow the real markup (e.g. promo CTA copy). Strip before innerHTML.
+     */
+    function stripDevServerReloadSnippet(html) {
+        if (!html || typeof html !== 'string') return html;
+        return html.replace(
+            /<!--\s*Code injected by[\s\S]*?-->\s*<script\b[\s\S]*?<\/script>/gi,
+            ''
+        );
+    }
+
     function setActiveNav() {
         var page = document.body.getAttribute('data-page') || '';
-        if (!page) return;
+        if (!page) {
+            return;
+        }
         document.querySelectorAll('.nav__link[data-nav="' + page + '"], .mobile-menu__link[data-nav="' + page + '"], .sidebar__link[data-nav="' + page + '"]').forEach(function (el) {
             el.classList.add('nav__link--active', 'mobile-menu__link--active', 'sidebar__link--active');
         });
-        var toggle = document.querySelector('.sidebar-toggle');
-        var sidebar = document.querySelector('.sidebar');
-        if (toggle && sidebar) {
-            toggle.addEventListener('click', function () {
-                sidebar.classList.toggle('open');
-            });
-        }
     }
 
     function injectSvgSprite() {
@@ -63,9 +72,9 @@
             fetch(base + 'partials/footer.html').then(function (r) { return r.text(); }),
             fetch(base + 'partials/cta-banner.html').then(function (r) { return r.text(); })
         ]).then(function (parts) {
-            var headerHtml = rewriteLinks(parts[0]);
-            var footerHtml = rewriteLinks(parts[1]);
-            var bannerHtml = rewriteLinks(parts[2]);
+            var headerHtml = rewriteLinks(stripDevServerReloadSnippet(parts[0]));
+            var footerHtml = rewriteLinks(stripDevServerReloadSnippet(parts[1]));
+            var bannerHtml = rewriteLinks(stripDevServerReloadSnippet(parts[2]));
             var headerPlaceholder = document.getElementById('partial-header');
             var footerPlaceholder = document.getElementById('partial-footer');
             if (headerPlaceholder) {
@@ -105,7 +114,18 @@
         var sidebarPlaceholder = document.getElementById('partial-sidebar');
         if (sidebarPlaceholder) {
             fetch(base + 'partials/sidebar.html').then(function (r) { return r.text(); }).then(function (html) {
-                sidebarPlaceholder.outerHTML = rewriteLinks(html);
+                sidebarPlaceholder.outerHTML = rewriteLinks(stripDevServerReloadSnippet(html));
+                var pathNorm = pathname.replace(/\/$/, '') || '/';
+                var aside = document.querySelector('.layout-with-sidebar .blog-sidebar');
+                if (aside) {
+                    aside.querySelectorAll('.blog-sidebar__list a[href^="/"]').forEach(function (a) {
+                        var h = (a.getAttribute('href') || '').split('#')[0].replace(/\/$/, '');
+                        if (h && h === pathNorm) {
+                            a.setAttribute('aria-current', 'page');
+                            a.classList.add('blog-sidebar__link--current');
+                        }
+                    });
+                }
             }).catch(function () {});
         }
     }

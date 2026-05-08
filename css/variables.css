@@ -1,0 +1,95 @@
+/* Design tokens — aligned with brand.md (spacing, type, radius, buttons, colors). */
+
+:root {
+    /* Spacing */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-2xl: 3rem;
+
+    /* Typography */
+    --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-heading: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --tracking-tight: -0.02em;
+
+    /* Radius */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-xl: 20px;
+    --radius-2xl: 28px;
+
+    /* Large panels (bento tiles, wide cards) — between lg and pill */
+    --radius-panel: var(--radius-xl);
+
+    /* Layout width */
+    --container-max-width: 1200px;
+
+    /* Section shells — same vertical + horizontal gutters sitewide */
+    --section-padding-x: var(--space-lg);
+    --section-padding-y: var(--space-2xl);
+
+    /* Buttons */
+    --btn-padding-y: 0.75rem;
+    --btn-padding-x: 1.5rem;
+    --btn-font-size: 0.875rem;
+    --btn-padding-y-sm: 0.5rem;
+    --btn-padding-x-sm: 1rem;
+    --btn-font-size-sm: 0.75rem;
+    --btn-padding-y-lg: 1rem;
+    --btn-padding-x-lg: 2rem;
+    --btn-font-size-lg: 1rem;
+
+    /* Brand — gold on dark */
+    --primary: #e6b800;
+    --primary-dark: #b8960a;
+    --primary-light: #ffeb3b;
+    --secondary-dark: #2a2a32;
+    --dark-bg: #1a1a20;
+    --darker-bg: #141418;
+    --card-bg: #2a2a32;
+    --card-bg-hover: #34343e;
+
+    --text-primary: #ffffff;
+    --text-secondary: #e4e4ea;
+    --text-muted: #9a9aa8;
+
+    --accent-yellow: #e6b800;
+    --accent-gold: #ffd54f;
+    --accent-gold-dark: #b8960a;
+    --success-green: #10b981;
+    --warning-orange: #f97316;
+    --error-red: #ef4444;
+
+    --border-color: rgba(255, 255, 255, 0.08);
+    --border-color-light: rgba(255, 255, 255, 0.15);
+
+    --gradient-primary: linear-gradient(135deg, #e6b800 0%, #b8960a 100%);
+    --gradient-gold: linear-gradient(135deg, #ffeb3b 0%, #e6b800 100%);
+    --gradient-dark: linear-gradient(180deg, #2a2a32 0%, #141418 100%);
+    --gradient-card: linear-gradient(145deg, #32323a 0%, #25252c 100%);
+
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.45);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.55);
+    --shadow-glow: 0 0 28px rgba(230, 184, 0, 0.35);
+
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+
+    /* layout.css aliases (layout-v2) */
+    --bg-base: var(--darker-bg);
+    --bg-elevated: #1e1e24;
+    --bg-card: var(--card-bg);
+    --bg-card-hover: var(--card-bg-hover);
+    --accent: var(--primary);
+    --accent-soft: var(--primary-light);
+    --accent-deep: var(--primary-dark);
+    --text: var(--text-primary);
+    --text-dim: var(--text-secondary);
+    --border: var(--border-color);
+    --radius: var(--radius-md);
+}

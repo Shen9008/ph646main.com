@@ -3,9 +3,14 @@
   "version": "1.0.0",
   "description": "PH646 Philippines - Online Casino & Sports Betting (ph646main.com)",
   "scripts": {
+    "dev": "npx --yes serve .",
     "deploy": "npx wrangler pages deploy . --project-name=ph646main",
     "deploy:pages": "npx wrangler pages deploy . --project-name=ph646main",
-    "convert-visuals": "node scripts/convert-visuals-to-webp.js"
+    "convert-visuals": "node scripts/convert-visuals-to-webp.js",
+    "build:blogs-json": "node scripts/build-blogs-json-from-news.js",
+    "rebuild:news-articles": "node scripts/rebuild-news-articles.js",
+    "sync": "node scripts/content-sync.js",
+    "sync:doctor": "node scripts/sync-doctor.js"
   },
   "keywords": [
     "PH646",
@@ -17,6 +22,7 @@
   "author": "",
   "license": "UNLICENSED",
   "devDependencies": {
+    "dotenv": "^16.4.7",
     "sharp": "^0.34.5"
   }
 }

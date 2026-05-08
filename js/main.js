@@ -1,6 +1,26 @@
 // PH646 (ph646main.com) — site JavaScript
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Layout-v2 sidebar (header injected async) — delegation so ☰ always works
+    document.body.addEventListener('click', function (e) {
+        var sidebarToggle = e.target.closest('.sidebar-toggle');
+        if (sidebarToggle) {
+            e.preventDefault();
+            var sidebar = document.querySelector('.sidebar');
+            if (sidebar) {
+                sidebar.classList.toggle('open');
+            }
+            return;
+        }
+        var sideLink = e.target.closest('.sidebar .sidebar__link');
+        if (sideLink && window.matchMedia('(max-width: 1023px)').matches) {
+            var sb = document.querySelector('.sidebar');
+            if (sb) {
+                sb.classList.remove('open');
+            }
+        }
+    });
+
     // Mobile Menu Toggle (event delegation - works after partials load)
     document.body.addEventListener('click', function(e) {
         var toggle = e.target.closest('.mobile-menu-toggle');
@@ -43,6 +63,25 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    (function initScrollTop() {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'scroll-top';
+        btn.setAttribute('aria-label', 'Back to top');
+        btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 4l-8 8 1.41 1.41L11 7.83V20h2V7.83l5.59 5.58L20 12l-8-8z"/></svg>';
+        document.body.appendChild(btn);
+        function syncVisibility() {
+            var y = window.pageYOffset || document.documentElement.scrollTop;
+            btn.classList.toggle('scroll-top--visible', y > 320);
+        }
+        syncVisibility();
+        window.addEventListener('scroll', syncVisibility, { passive: true });
+        btn.addEventListener('click', function () {
+            var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+        });
+    })();
 
     // Header scroll effect (runs when header exists, e.g. after partials)
     function initHeaderScroll() {
@@ -153,7 +192,10 @@ document.addEventListener('DOMContentLoaded', function() {
     (function() {
         var page = document.body.getAttribute('data-page') || 'index';
         var bannerKey = { 'slots': 'slots', 'live-casino': 'live', 'sports-betting': 'sports' }[page] || 'main';
-        var base = (window.location.pathname || '').indexOf('news') !== -1 ? '../' : '';
+        var pathname = (window.location.pathname || '').replace(/\/$/, '') || '/';
+        var segments = pathname.split('/').filter(Boolean).filter(function (s) { return s !== 'index.html'; });
+        var depth = segments.length;
+        var base = depth > 0 ? Array(depth + 1).join('../') : '';
         fetch(base + 'config/banners.json').then(function(r) { return r.json(); }).then(function(config) {
             var b = config[bannerKey] || config.main;
             if (!b) return;

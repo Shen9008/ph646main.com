@@ -12,18 +12,19 @@
     <meta property="og:description" content="Discover PH646 — slots, live casino & sports betting for Filipino players. Fast PHP payments, daily events & welcome offers. Official PH646 site: ph646main.com.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ph646main.com/">
-    <meta property="og:image" content="https://ph646main.com/images/hero-banner/hero-promotion.webp">
+    <meta property="og:image" content="https://ph646main.com/images/hero-banners/hero-promotion.webp">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:locale" content="en_PH">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="PH646 | Online Casino & Sports — Philippines">
     <meta name="twitter:description" content="PH646 brings casino games, live tables & sports odds together on ph646main.com. PHP banking, promos & support built for the Philippines.">
-    <meta name="twitter:image" content="https://ph646main.com/images/hero-banner/hero-promotion.webp">
+    <meta name="twitter:image" content="https://ph646main.com/images/hero-banners/hero-promotion.webp">
     <link rel="sitemap" type="application/xml" title="Sitemap" href="https://ph646main.com/sitemap.xml">
-    <link rel="icon" href="/images/placeholder-favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/images/logo/logo-favicon.webp" type="image/webp">
+    <link rel="icon" href="/images/logo/logo-main.webp" type="image/webp" sizes="32x32">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/style.css">
     <script defer src="js/load-partials.js"></script>
@@ -41,7 +42,7 @@
             "url": "https://ph646main.com/",
             "logo": {
                 "@type": "ImageObject",
-                "url": "https://ph646main.com/images/placeholder-favicon.svg"
+                "url": "https://ph646main.com/images/logo/logo-main.webp"
             }
         }
     }
@@ -86,7 +87,7 @@
     <section class="block" aria-label="PH646 Philippines platform statistics">
         <div class="block__title">Why players choose PH646</div>
         <div class="block__sub">Real numbers behind the PH646 casino & sportsbook</div>
-        <div class="container" style="max-width: 1100px; margin: 0 auto;">
+        <div class="container">
             <div class="stats-grid" data-animate>
                 <div class="stat-card">
                     <div class="stat-card__value">720+</div>
@@ -118,85 +119,107 @@
     </section>
 
     <!-- Sports odds -->
-    <section class="block block--alt">
-        <div class="block__title">PH646 Sports – Live Odds & Predictions</div>
-        <div class="block__sub">PBA, NBA, football, MMA & more</div>
-        <div style="max-width: 700px;">
-            <div class="odds-row" data-animate>
-                <div>
-                    <span class="odds-row__league">PBA</span>
-                    <span class="odds-row__date">Wed, 12 Mar</span>
-                    <br><span class="odds-row__match">Barangay Ginebra vs San Miguel Beermen</span>
+    <section class="block block--alt live-odds" aria-labelledby="live-odds-heading">
+        <div class="container">
+            <header class="live-odds__header">
+                <h2 class="block__title" id="live-odds-heading">PH646 Sports – Live Odds &amp; Predictions</h2>
+                <p class="block__sub live-odds__intro">PBA, NBA, football, MMA &amp; more — sample lines from the PH646 sportsbook.</p>
+            </header>
+            <div class="odds-grid">
+                <div class="odds-row" data-animate>
+                    <div class="odds-row__main">
+                        <div class="odds-row__meta">
+                            <span class="odds-row__league">PBA</span>
+                            <span class="odds-row__date">Wed, 12 Mar</span>
+                        </div>
+                        <div class="odds-row__match">Barangay Ginebra vs San Miguel Beermen</div>
+                    </div>
+                    <div class="odds-row__odds" aria-label="Odds">1.92 / 1.88</div>
                 </div>
-                <span class="odds-row__odds">1.92 / 1.88</span>
-            </div>
-            <div class="odds-row" data-animate>
-                <div>
-                    <span class="odds-row__league">NBA</span>
-                    <span class="odds-row__date">Thu, 13 Mar</span>
-                    <br><span class="odds-row__match">Lakers vs Celtics</span>
+                <div class="odds-row" data-animate>
+                    <div class="odds-row__main">
+                        <div class="odds-row__meta">
+                            <span class="odds-row__league">NBA</span>
+                            <span class="odds-row__date">Thu, 13 Mar</span>
+                        </div>
+                        <div class="odds-row__match">Lakers vs Celtics</div>
+                    </div>
+                    <div class="odds-row__odds" aria-label="Odds">2.05 / 1.78</div>
                 </div>
-                <span class="odds-row__odds">2.05 / 1.78</span>
-            </div>
-            <div class="odds-row" data-animate>
-                <div>
-                    <span class="odds-row__league">EPL</span>
-                    <span class="odds-row__date">Sun, 9 Mar</span>
-                    <br><span class="odds-row__match">Manchester United vs Liverpool FC</span>
+                <div class="odds-row" data-animate>
+                    <div class="odds-row__main">
+                        <div class="odds-row__meta">
+                            <span class="odds-row__league">EPL</span>
+                            <span class="odds-row__date">Sun, 9 Mar</span>
+                        </div>
+                        <div class="odds-row__match">Manchester United vs Liverpool FC</div>
+                    </div>
+                    <div class="odds-row__odds" aria-label="Odds">2.85 / 3.40 / 2.45</div>
                 </div>
-                <span class="odds-row__odds">2.85 / 3.40 / 2.45</span>
-            </div>
-            <div class="odds-row" data-animate>
-                <div>
-                    <span class="odds-row__league">MPBL</span>
-                    <span class="odds-row__date">Sat, 15 Mar</span>
-                    <br><span class="odds-row__match">Batangas City vs Makati Kings</span>
+                <div class="odds-row" data-animate>
+                    <div class="odds-row__main">
+                        <div class="odds-row__meta">
+                            <span class="odds-row__league">MPBL</span>
+                            <span class="odds-row__date">Sat, 15 Mar</span>
+                        </div>
+                        <div class="odds-row__match">Batangas City vs Makati Kings</div>
+                    </div>
+                    <div class="odds-row__odds" aria-label="Odds">1.88 / 1.92</div>
                 </div>
-                <span class="odds-row__odds">1.88 / 1.92</span>
-            </div>
-            <div class="odds-row" data-animate>
-                <div>
-                    <span class="odds-row__league">UAAP</span>
-                    <span class="odds-row__date">Sat, 15 Mar</span>
-                    <br><span class="odds-row__match">Ateneo Blue Eagles vs De La Salle Green Archers</span>
+                <div class="odds-row" data-animate>
+                    <div class="odds-row__main">
+                        <div class="odds-row__meta">
+                            <span class="odds-row__league">UAAP</span>
+                            <span class="odds-row__date">Sat, 15 Mar</span>
+                        </div>
+                        <div class="odds-row__match">Ateneo Blue Eagles vs De La Salle Green Archers</div>
+                    </div>
+                    <div class="odds-row__odds" aria-label="Odds">1.75 / 2.05</div>
                 </div>
-                <span class="odds-row__odds">1.75 / 2.05</span>
-            </div>
-            <div class="odds-row" data-animate>
-                <div>
-                    <span class="odds-row__league">UFC</span>
-                    <span class="odds-row__date">Sun, 16 Mar</span>
-                    <br><span class="odds-row__match">Main event – featherweight title</span>
+                <div class="odds-row" data-animate>
+                    <div class="odds-row__main">
+                        <div class="odds-row__meta">
+                            <span class="odds-row__league">UFC</span>
+                            <span class="odds-row__date">Sun, 16 Mar</span>
+                        </div>
+                        <div class="odds-row__match">Main event – featherweight title</div>
+                    </div>
+                    <div class="odds-row__odds" aria-label="Odds">1.65 / 2.25</div>
                 </div>
-                <span class="odds-row__odds">1.65 / 2.25</span>
-            </div>
-            <div class="odds-row" data-animate>
-                <div>
-                    <span class="odds-row__league">Tennis</span>
-                    <span class="odds-row__date">Sun, 26 Jan</span>
-                    <br><span class="odds-row__match">Grand Slam – men's singles final</span>
+                <div class="odds-row" data-animate>
+                    <div class="odds-row__main">
+                        <div class="odds-row__meta">
+                            <span class="odds-row__league">Tennis</span>
+                            <span class="odds-row__date">Sun, 26 Jan</span>
+                        </div>
+                        <div class="odds-row__match">Grand Slam – men's singles final</div>
+                    </div>
+                    <div class="odds-row__odds" aria-label="Odds">1.72 / 2.10</div>
                 </div>
-                <span class="odds-row__odds">1.72 / 2.10</span>
-            </div>
-            <div class="odds-row" data-animate>
-                <div>
-                    <span class="odds-row__league">Volleyball</span>
-                    <span class="odds-row__date">Tue, 18 Mar</span>
-                    <br><span class="odds-row__match">PVL – knockout stage</span>
+                <div class="odds-row" data-animate>
+                    <div class="odds-row__main">
+                        <div class="odds-row__meta">
+                            <span class="odds-row__league">Volleyball</span>
+                            <span class="odds-row__date">Tue, 18 Mar</span>
+                        </div>
+                        <div class="odds-row__match">PVL – knockout stage</div>
+                    </div>
+                    <div class="odds-row__odds" aria-label="Odds">1.95 / 1.85</div>
                 </div>
-                <span class="odds-row__odds">1.95 / 1.85</span>
-            </div>
-            <div class="odds-row" data-animate>
-                <div>
-                    <span class="odds-row__league">Esports</span>
-                    <span class="odds-row__date">Fri, 21 Mar</span>
-                    <br><span class="odds-row__match">MLBB · MPL Philippines playoff</span>
+                <div class="odds-row" data-animate>
+                    <div class="odds-row__main">
+                        <div class="odds-row__meta">
+                            <span class="odds-row__league">Esports</span>
+                            <span class="odds-row__date">Fri, 21 Mar</span>
+                        </div>
+                        <div class="odds-row__match">MLBB · MPL Philippines playoff</div>
+                    </div>
+                    <div class="odds-row__odds" aria-label="Odds">1.80 / 1.95</div>
                 </div>
-                <span class="odds-row__odds">1.80 / 1.95</span>
             </div>
-        </div>
-        <div style="margin-top: 1.5rem;">
-            <a href="https://reffpa.com/L?tag=d_5501493m_1236c_&site=5501493&ad=1236" target="_blank" rel="noopener noreferrer" class="btn btn--primary">View all sports</a>
+            <div class="live-odds__cta">
+                <a href="https://reffpa.com/L?tag=d_5501493m_1236c_&site=5501493&ad=1236" target="_blank" rel="noopener noreferrer" class="btn btn--primary">View all sports</a>
+            </div>
         </div>
     </section>
 
@@ -206,70 +229,70 @@
         <div class="block__sub">Slots & live tables Filipino players love</div>
         <div class="tile-grid">
             <a href="/slots/" class="tile" data-animate>
-                <div class="tile__img"><img src="images/Slot/fire portals slot.jpg" alt="Fire Portals"></div>
+                <div class="tile__img"><img src="images/slot/fire-portals-slot.webp" alt="Fire Portals"></div>
                 <div class="tile__body">
                     <div class="tile__title">Fire Portals</div>
                     <div class="tile__meta">Pragmatic · Clusters</div>
                 </div>
             </a>
             <a href="/slots/" class="tile" data-animate>
-                <div class="tile__img"><img src="images/Slot/sweet bonanza slot.jpg" alt="Sweet Bonanza"></div>
+                <div class="tile__img"><img src="images/slot/sweet-bonanza-slot.webp" alt="Sweet Bonanza"></div>
                 <div class="tile__body">
                     <div class="tile__title">Sweet Bonanza</div>
                     <div class="tile__meta">Pragmatic · Tumble wins</div>
                 </div>
             </a>
             <a href="/slots/" class="tile" data-animate>
-                <div class="tile__img"><img src="images/Slot/gonzos quest megaways slot.jpg" alt="Gonzo's Quest Megaways"></div>
+                <div class="tile__img"><img src="images/slot/gonzos-quest-megaways-slot.webp" alt="Gonzo's Quest Megaways"></div>
                 <div class="tile__body">
                     <div class="tile__title">Gonzo's Quest Megaways</div>
                     <div class="tile__meta">Red Tiger · Megaways</div>
                 </div>
             </a>
             <a href="/live-casino/" class="tile" data-animate>
-                <div class="tile__img"><img src="images/Live Casino/Immersive Roulette evolution.jpg" alt="Immersive Roulette"></div>
+                <div class="tile__img"><img src="images/live-casino/immersive-roulette-evolution.webp" alt="Immersive Roulette"></div>
                 <div class="tile__body">
                     <div class="tile__title">Immersive Roulette</div>
                     <div class="tile__meta">Evolution · Multi-cam</div>
                 </div>
             </a>
             <a href="/live-casino/" class="tile" data-animate>
-                <div class="tile__img"><img src="images/Live Casino/Monopoly Live evolution.jpg" alt="Monopoly Live"></div>
+                <div class="tile__img"><img src="images/live-casino/monopoly-live-evolution.webp" alt="Monopoly Live"></div>
                 <div class="tile__body">
                     <div class="tile__title">Monopoly Live</div>
                     <div class="tile__meta">Evolution · Bonus wheel</div>
                 </div>
             </a>
             <a href="/live-casino/" class="tile" data-animate>
-                <div class="tile__img"><img src="images/Live Casino/Lightning Baccarat evolution.jpg" alt="Lightning Baccarat"></div>
+                <div class="tile__img"><img src="images/live-casino/lightning-baccarat-evolution.webp" alt="Lightning Baccarat"></div>
                 <div class="tile__body">
                     <div class="tile__title">Lightning Baccarat</div>
                     <div class="tile__meta">Evolution · Multipliers</div>
                 </div>
             </a>
             <a href="/slots/" class="tile" data-animate>
-                <div class="tile__img"><img src="images/Slot/wanted dead or a wild slot.jpg" alt="Wanted Dead or a Wild"></div>
+                <div class="tile__img"><img src="images/slot/wanted-dead-or-a-wild-slot.webp" alt="Wanted Dead or a Wild"></div>
                 <div class="tile__body">
                     <div class="tile__title">Wanted Dead or a Wild</div>
                     <div class="tile__meta">Hacksaw · High volatility</div>
                 </div>
             </a>
             <a href="/slots/" class="tile" data-animate>
-                <div class="tile__img"><img src="images/Slot/wheel of wishes slot.jpg" alt="Wheel of Wishes"></div>
+                <div class="tile__img"><img src="images/slot/wheel-of-wishes-slot.webp" alt="Wheel of Wishes"></div>
                 <div class="tile__body">
                     <div class="tile__title">Wheel of Wishes</div>
                     <div class="tile__meta">WowPot · Jackpot</div>
                 </div>
             </a>
             <a href="/live-casino/" class="tile" data-animate>
-                <div class="tile__img"><img src="images/Live Casino/Speed Blackjack evolution.jpg" alt="Speed Blackjack"></div>
+                <div class="tile__img"><img src="images/live-casino/speed-blackjack-evolution.webp" alt="Speed Blackjack"></div>
                 <div class="tile__body">
                     <div class="tile__title">Speed Blackjack</div>
                     <div class="tile__meta">Evolution · Fast rounds</div>
                 </div>
             </a>
             <a href="/slots/" class="tile" data-animate>
-                <div class="tile__img"><img src="images/Slot/extra chilli slots.png" alt="Extra Chilli"></div>
+                <div class="tile__img"><img src="images/slot/extra-chilli-slots.webp" alt="Extra Chilli"></div>
                 <div class="tile__body">
                     <div class="tile__title">Extra Chilli</div>
                     <div class="tile__meta">Big Time · Megaways</div>
@@ -284,40 +307,95 @@
     <!-- CTA (injected by load-partials) -->
 
     <!-- SEO content -->
-    <section class="block block--alt">
-        <div class="content-area">
-            <article class="content-page__content" style="max-width: 800px; margin: 0 auto; text-align: left;">
-                <h1 class="block__title">PH646: Your Online Casino & Sports Hub on ph646main.com</h1>
-                <p>Tired of jumping between apps just to play slots, watch a live table, and place a sports bet? <strong>PH646</strong> keeps it simple: one <strong>PH646 login</strong> on <strong>ph646main.com</strong> opens the whole floor—<a href="/slots/">PH646 slots</a>, <a href="/live-casino/">PH646 live casino</a>, and <a href="/sports-betting/">PH646 sports betting</a>—with <strong>720+ casino titles</strong> from <strong>40+ providers</strong> and a sportsbook that regularly lists <strong>1,000+ daily events</strong> across <strong>35+ sports</strong> and <strong>200+ football leagues</strong>. Whether you follow the <strong>PBA</strong>, the <strong>NBA</strong>, or weekend football, you can spin, stream, and stake without leaving the PH646 ecosystem.</p>
+    <section class="block block--alt seo-hub" aria-labelledby="seo-hub-title">
+        <div class="container">
+            <article class="seo-hub__article">
+                <header class="seo-hub__hero">
+                    <h1 class="seo-hub__title" id="seo-hub-title">PH646: Your Online Casino &amp; Sports Hub on ph646main.com</h1>
+                    <p class="seo-hub__lead">Tired of jumping between apps just to play slots, watch a live table, and place a sports bet? <strong>PH646</strong> keeps it simple: one <strong>PH646 login</strong> on <strong>ph646main.com</strong> opens the whole floor—<a href="/slots/">PH646 slots</a>, <a href="/live-casino/">PH646 live casino</a>, and <a href="/sports-betting/">PH646 sports betting</a>—with <strong>720+ casino titles</strong> from <strong>40+ providers</strong> and a sportsbook that regularly lists <strong>1,000+ daily events</strong> across <strong>35+ sports</strong> and <strong>200+ football leagues</strong>. Whether you follow the <strong>PBA</strong>, the <strong>NBA</strong>, or weekend football, you can spin, stream, and stake without leaving the PH646 ecosystem.</p>
+                </header>
 
-                <h2>What makes the PH646 experience stand out?</h2>
-                <p>Many sites offer an <strong>online casino Philippines</strong> product; fewer pair it with a serious sportsbook <em>and</em> a polished <a href="/live-casino/">live casino</a>. PH646 is built around that triple play—so you can chase a bonus round on Gates of Olympus, slide into a live blackjack seat, then line up a basketball or football pick on the same night. Fresh games arrive often from names like Pragmatic Play, Evolution, NetEnt and Microgaming, and your <a href="/promotions/">PH646 promotions</a> are designed to work across products when terms allow. That’s the point of PH646: less tab-hopping, more time actually playing.</p>
+                <section class="seo-hub__panel" aria-labelledby="seo-hub-stand">
+                    <h2 class="seo-hub__h2" id="seo-hub-stand">What makes the PH646 experience stand out?</h2>
+                    <p>Many sites offer an <strong>online casino Philippines</strong> product; fewer pair it with a serious sportsbook <em>and</em> a polished <a href="/live-casino/">live casino</a>. PH646 is built around that triple play—so you can chase a bonus round on Gates of Olympus, slide into a live blackjack seat, then line up a basketball or football pick on the same night. Fresh games arrive often from names like Pragmatic Play, Evolution, NetEnt and Microgaming, and your <a href="/promotions/">PH646 promotions</a> are designed to work across products when terms allow. That’s the point of PH646: less tab-hopping, more time actually playing.</p>
+                </section>
 
-                <h2>PH646 by the numbers (and what they mean for you)</h2>
-                <p>Behind the brand is a deep catalogue: <strong>520+ online slots</strong> (Megaways, jackpots, high-RTP picks), <strong>130+ live tables &amp; game shows</strong>, and <strong>70+ RNG table games</strong>—over <strong>720 casino games</strong> in one PH646 account. On the betting side, think <strong>35+ sports</strong>, thousands of weekly fixtures, and markets from 1X2 and handicaps to totals, props, futures and bet builder on selected events. Sessions run over <strong>TLS encryption</strong>, balances are handled responsibly, and RNG titles are supplied by audited studios aligned with standards such as <a href="https://www.ecogra.org" target="_blank" rel="noopener noreferrer">eCOGRA</a>-level testing—so you know what “fair” looks like at PH646.</p>
+                <section class="seo-hub__panel" aria-labelledby="seo-hub-numbers">
+                    <h2 class="seo-hub__h2" id="seo-hub-numbers">PH646 by the numbers (and what they mean for you)</h2>
+                    <p class="seo-hub__panel-intro">Behind the brand is a deep catalogue in one PH646 account — plus markets and protections you can rely on.</p>
+                    <ul class="seo-hub__stats" aria-label="Platform scale">
+                        <li class="seo-hub__stat">
+                            <span class="seo-hub__stat-value">720+</span>
+                            <span class="seo-hub__stat-label">Casino titles</span>
+                        </li>
+                        <li class="seo-hub__stat">
+                            <span class="seo-hub__stat-value">520+</span>
+                            <span class="seo-hub__stat-label">Online slots</span>
+                        </li>
+                        <li class="seo-hub__stat">
+                            <span class="seo-hub__stat-value">130+</span>
+                            <span class="seo-hub__stat-label">Live tables &amp; shows</span>
+                        </li>
+                        <li class="seo-hub__stat">
+                            <span class="seo-hub__stat-value">70+</span>
+                            <span class="seo-hub__stat-label">RNG table games</span>
+                        </li>
+                        <li class="seo-hub__stat">
+                            <span class="seo-hub__stat-value">35+</span>
+                            <span class="seo-hub__stat-label">Sports</span>
+                        </li>
+                        <li class="seo-hub__stat">
+                            <span class="seo-hub__stat-value">40+</span>
+                            <span class="seo-hub__stat-label">Game providers</span>
+                        </li>
+                    </ul>
+                    <p>On the betting side, think thousands of weekly fixtures and markets from 1X2 and handicaps to totals, props, futures and bet builder on selected events.</p>
+                    <p>Sessions run over <strong>TLS encryption</strong>, balances are handled responsibly, and RNG titles are supplied by audited studios aligned with standards such as <a href="https://www.ecogra.org" target="_blank" rel="noopener noreferrer">eCOGRA</a>-level testing—so you know what “fair” looks like at PH646.</p>
+                </section>
 
-                <h2>PH646 slots — something for every mood</h2>
-                <p>If you’re here for reels, <a href="/slots/">PH646 slots</a> won’t leave you short: fan favourites like Sweet Bonanza and Starlight Princess sit next to Big Bass Bonanza, Mega Moolah and Divine Fortune for jackpot chasers. Want slower, steadier sessions? Filter toward lower-volatility games and use our <a href="/news/online-pokies-australia-guide/">slot guides</a> and <a href="/news/slot-rtp-explained-australia/">RTP explainers</a> to match games to your style—smart play starts with knowing how PH646 games behave, not just how they look.</p>
+                <section class="seo-hub__panel" aria-labelledby="seo-hub-slots">
+                    <h2 class="seo-hub__h2" id="seo-hub-slots">PH646 slots — something for every mood</h2>
+                    <p>If you’re here for reels, <a href="/slots/">PH646 slots</a> won’t leave you short: fan favourites like Sweet Bonanza and Starlight Princess sit next to Big Bass Bonanza, Mega Moolah and Divine Fortune for jackpot chasers. Want slower, steadier sessions? Filter toward lower-volatility games and use our <a href="/news/online-pokies-australia-guide/">slot guides</a> and <a href="/news/slot-rtp-explained-australia/">RTP explainers</a> to match games to your style—smart play starts with knowing how PH646 games behave, not just how they look.</p>
+                </section>
 
-                <h2>PH646 live casino — tables that feel like the real thing</h2>
-                <p>When you want human pace and real wheels, <a href="/live-casino/">PH646 live casino</a> streams HD tables from Evolution-led studios: Lightning Roulette, Infinite Blackjack, Crazy Time and more, morning or midnight. Pair that with our <a href="/table-games/">RNG table games</a> when you want faster rounds offline-style, and you’ve got flexibility most single-product sites can’t match.</p>
+                <section class="seo-hub__panel" aria-labelledby="seo-hub-live">
+                    <h2 class="seo-hub__h2" id="seo-hub-live">PH646 live casino — tables that feel like the real thing</h2>
+                    <p>When you want human pace and real wheels, <a href="/live-casino/">PH646 live casino</a> streams HD tables from Evolution-led studios: Lightning Roulette, Infinite Blackjack, Crazy Time and more, morning or midnight. Pair that with our <a href="/table-games/">RNG table games</a> when you want faster rounds offline-style, and you’ve got flexibility most single-product sites can’t match.</p>
+                </section>
 
-                <h2>PH646 sports betting — local heart, global calendar</h2>
-                <p><strong>PH646 sports betting</strong> is where hometown hoops meets world football: think <strong>PBA</strong> and <strong>MPBL</strong> alongside the <strong>EPL</strong>, <strong>La Liga</strong>, <strong>NBA</strong> and <strong>UFC</strong>, with <strong>decimal odds</strong> that feel natural for Philippines players. Pre-match, live in-play, cash out (where available) and bet builder tools help you shape tickets your way. New to betting? Our <a href="/news/sports-betting-australia-guide/">sports betting guide</a> breaks down markets in plain language so your PH646 bets stay fun and informed.</p>
+                <section class="seo-hub__panel" aria-labelledby="seo-hub-sports">
+                    <h2 class="seo-hub__h2" id="seo-hub-sports">PH646 sports betting — local heart, global calendar</h2>
+                    <p><strong>PH646 sports betting</strong> is where hometown hoops meets world football: think <strong>PBA</strong> and <strong>MPBL</strong> alongside the <strong>EPL</strong>, <strong>La Liga</strong>, <strong>NBA</strong> and <strong>UFC</strong>, with <strong>decimal odds</strong> that feel natural for Philippines players. Pre-match, live in-play, cash out (where available) and bet builder tools help you shape tickets your way. New to betting? Our <a href="/news/sports-betting-australia-guide/">sports betting guide</a> breaks down markets in plain language so your PH646 bets stay fun and informed.</p>
+                </section>
 
-                <h2>Bonuses &amp; PH646 promos — read before you claim</h2>
-                <p>New members can explore a <a href="/promotions/">PH646 welcome offer</a> that typically combines a deposit match with free spins on selected games; regulars get reload deals, cashback-style perks and sports boosts depending on what’s live. Always read the small print—wagering, game weighting and expiry matter. Our <a href="/news/welcome-bonus-casino-australia/">welcome bonus guide</a> and <a href="/news/casino-bonuses-australia-explained/">bonus explainer</a> translate the legalese so you know exactly what you’re opting into at PH646.</p>
+                <section class="seo-hub__panel" aria-labelledby="seo-hub-bonus">
+                    <h2 class="seo-hub__h2" id="seo-hub-bonus">Bonuses &amp; PH646 promos — read before you claim</h2>
+                    <p>New members can explore a <a href="/promotions/">PH646 welcome offer</a> that typically combines a deposit match with free spins on selected games; regulars get reload deals, cashback-style perks and sports boosts depending on what’s live. Always read the small print—wagering, game weighting and expiry matter. Our <a href="/news/welcome-bonus-casino-australia/">welcome bonus guide</a> and <a href="/news/casino-bonuses-australia-explained/">bonus explainer</a> translate the legalese so you know exactly what you’re opting into at PH646.</p>
+                </section>
 
-                <h2>Trust, PHP banking &amp; playing smart</h2>
-                <p>PH646 protects sign-ins and payments with <strong>256-bit TLS</strong>, uses <strong>KYC</strong> before cash-outs, and follows industry norms on <strong>player fund segregation</strong>. Deposit and play in <strong>PHP</strong> via cards, bank transfer and popular e-wallets—often from around <strong>₱500–1,000</strong> minimums depending on method. Deposits usually land instantly; e-wallet withdrawals are often under <strong>24 hours</strong> after approval, while bank rails may need <strong>3–5 business days</strong>. Questions? Start at the <a href="/help-center/">Help Center</a> or read <a href="/about-us/">About PH646</a>. For safer play, visit <a href="/responsible-gambling/">Responsible Gambling</a>; for regulatory background, <a href="https://www.pagcor.ph/index.php" target="_blank" rel="noopener noreferrer">PAGCOR</a> is a useful reference. Offshore support: <a href="https://www.gamblingtherapy.org" target="_blank" rel="noopener noreferrer">Gambling Therapy</a>. If it stops being fun, step away—that’s the PH646 way.</p>
+                <section class="seo-hub__panel" aria-labelledby="seo-hub-trust">
+                    <h2 class="seo-hub__h2" id="seo-hub-trust">Trust, PHP banking &amp; playing smart</h2>
+                    <p>PH646 protects sign-ins and payments with <strong>256-bit TLS</strong>, uses <strong>KYC</strong> before cash-outs, and follows industry norms on <strong>player fund segregation</strong>. Deposit and play in <strong>PHP</strong> via cards, bank transfer and popular e-wallets—often from around <strong>₱500–1,000</strong> minimums depending on method. Deposits usually land instantly; e-wallet withdrawals are often under <strong>24 hours</strong> after approval, while bank rails may need <strong>3–5 business days</strong>.</p>
+                    <nav class="seo-hub__quick-links" aria-label="Help and safety">
+                        <a href="/help-center/">Help Center</a>
+                        <a href="/about-us/">About PH646</a>
+                        <a href="/responsible-gambling/">Responsible Gambling</a>
+                        <a href="https://www.pagcor.ph/index.php" target="_blank" rel="noopener noreferrer">PAGCOR</a>
+                        <a href="https://www.gamblingtherapy.org" target="_blank" rel="noopener noreferrer">Gambling Therapy</a>
+                    </nav>
+                    <p class="seo-hub__closing-line">If it stops being fun, step away—that’s the PH646 way.</p>
+                </section>
 
-                <h2>Ready to join PH646?</h2>
-                <p>Register, verify, fund your wallet, grab your offer, then explore <a href="/slots/">PH646 slots</a>, <a href="/live-casino/">live casino</a> and <a href="/sports-betting/">sports</a> from one account. Bookmark <strong>ph646main.com</strong> for the official PH646 experience, skim our <a href="/news/">blog</a> for tips, and play responsibly. We’re glad you’re here.</p>
+                <section class="seo-hub__panel seo-hub__panel--cta" aria-labelledby="seo-hub-join">
+                    <h2 class="seo-hub__h2" id="seo-hub-join">Ready to join PH646?</h2>
+                    <p>Register, verify, fund your wallet, grab your offer, then explore <a href="/slots/">PH646 slots</a>, <a href="/live-casino/">live casino</a> and <a href="/sports-betting/">sports</a> from one account. Bookmark <strong>ph646main.com</strong> for the official PH646 experience, skim our <a href="/news/">news</a> for tips, and play responsibly. We’re glad you’re here.</p>
+                    <a href="https://reffpa.com/L?tag=d_5501493m_1236c_&site=5501493&ad=1236" target="_blank" rel="noopener noreferrer" class="btn btn--primary seo-hub__btn">Join PH646</a>
+                </section>
             </article>
         </div>
     </section>
 
-    <!-- Blog -->
+    <!-- News -->
     <section class="block">
         <div class="block__title">PH646 guides &amp; strategy</div>
         <div class="block__sub">Level up your PH646 play — slots, bonuses &amp; sports</div>

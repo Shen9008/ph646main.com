@@ -1,50 +1,73 @@
 <footer class="footer">
-    <div class="container" style="max-width: 1400px; margin: 0 auto; padding: 2rem 1.5rem;">
-        <div class="footer__trust" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 1rem 1.5rem; padding: 1rem 0; margin-bottom: 2rem; border-bottom: 1px solid var(--border);">
-            <a href="/responsible-gambling/" class="footer__trust-link">18+ Only</a>
-            <a href="/responsible-gambling/" class="footer__trust-link">Responsible Gambling</a>
-            <a href="/terms-conditions/" class="footer__trust-link">Terms & Conditions</a>
-            <a href="/help-center/" class="footer__trust-link">Help & Support</a>
-            <a href="https://www.pagcor.ph/index.php" target="_blank" rel="noopener noreferrer" class="footer__trust-link">PAGCOR</a>
-            <a href="https://www.ecogra.org" target="_blank" rel="noopener noreferrer" class="footer__trust-link">eCOGRA</a>
-            <a href="https://www.gamblingtherapy.org" target="_blank" rel="noopener noreferrer" class="footer__trust-link">Gambling Therapy</a>
-            <a href="https://www.begambleaware.org" target="_blank" rel="noopener noreferrer" class="footer__trust-link">BeGambleAware</a>
+    <div class="container footer__inner">
+        <div class="footer__trust">
+            <nav class="footer__trust-nav" aria-label="Compliance and resources">
+                <a href="/responsible-gambling/" class="footer__trust-link">18+ Only</a>
+                <a href="/responsible-gambling/" class="footer__trust-link">Responsible Gambling</a>
+                <a href="/terms-conditions/" class="footer__trust-link">Terms &amp; Conditions</a>
+                <a href="/help-center/" class="footer__trust-link">Help &amp; Support</a>
+                <a href="https://www.pagcor.ph/index.php" class="footer__trust-link footer__trust-link--external" target="_blank" rel="noopener noreferrer">PAGCOR</a>
+                <a href="https://www.ecogra.org" class="footer__trust-link footer__trust-link--external" target="_blank" rel="noopener noreferrer">eCOGRA</a>
+                <a href="https://www.gamblingtherapy.org" class="footer__trust-link footer__trust-link--external" target="_blank" rel="noopener noreferrer">Gambling Therapy</a>
+                <a href="https://www.begambleaware.org" class="footer__trust-link footer__trust-link--external" target="_blank" rel="noopener noreferrer">BeGambleAware</a>
+            </nav>
         </div>
-        <div style="display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); margin-bottom: 2rem;">
-            <div>
-                <a href="/" style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
-                    <span class="site-logo-placeholder site-logo-placeholder--footer" aria-hidden="true"></span>
-                    <span class="site-logo-title site-logo-title--footer">PH646</span>
+
+        <div class="footer__grid">
+            <div class="footer__brand">
+                <a href="/" class="footer__logo-link">
+                    <img class="site-logo-img site-logo-img--footer" src="/images/logo/logo-main.webp" alt="PH646 Philippines" width="120" height="36" decoding="async">
                 </a>
-                <span style="font-size: 0.7rem; color: var(--text-muted);">Philippines · ph646main.com</span>
+                <p class="footer__brand-meta">
+                    <span class="footer__brand-meta-dots" aria-hidden="true">&#183;</span>
+                    <a href="https://www.ph646.com/" class="footer__brand-url" target="_blank" rel="noopener noreferrer">www.ph646.com</a>
+                    <span class="footer__brand-meta-dots" aria-hidden="true">&#183;</span>
+                    <span class="footer__brand-region">Philippines</span>
+                </p>
+                <p class="footer__brand-site">ph646main.com</p>
             </div>
-            <div>
-                <h4 style="font-size: 0.75rem; font-weight: 700; color: var(--text-dim); margin-bottom: 0.75rem; text-transform: uppercase;">Gaming</h4>
-                <a href="/slots/" style="display: block; color: var(--text-dim); font-size: 0.875rem; margin-bottom: 0.5rem;">Slots</a>
-                <a href="/live-casino/" style="display: block; color: var(--text-dim); font-size: 0.875rem; margin-bottom: 0.5rem;">Live Casino</a>
-                <a href="/table-games/" style="display: block; color: var(--text-dim); font-size: 0.875rem; margin-bottom: 0.5rem;">Table Games</a>
-                <a href="/sports-betting/" style="display: block; color: var(--text-dim); font-size: 0.875rem;">Sports</a>
+
+            <div class="footer__column">
+                <h4 class="footer__heading">Gaming</h4>
+                <ul class="footer__links">
+                    <li><a href="/slots/">Slots</a></li>
+                    <li><a href="/live-casino/">Live Casino</a></li>
+                    <li><a href="/table-games/">Table Games</a></li>
+                    <li><a href="/sports-betting/">Sports</a></li>
+                </ul>
             </div>
-            <div>
-                <h4 style="font-size: 0.75rem; font-weight: 700; color: var(--text-dim); margin-bottom: 0.75rem; text-transform: uppercase;">Info</h4>
-                <a href="/about-us/" style="display: block; color: var(--text-dim); font-size: 0.875rem; margin-bottom: 0.5rem;">About</a>
-                <a href="/promotions/" style="display: block; color: var(--text-dim); font-size: 0.875rem; margin-bottom: 0.5rem;">Promotions</a>
-                <a href="/news/" style="display: block; color: var(--text-dim); font-size: 0.875rem;">Blog</a>
+            <div class="footer__column">
+                <h4 class="footer__heading">Info</h4>
+                <ul class="footer__links">
+                    <li><a href="/about-us/">About</a></li>
+                    <li><a href="/promotions/">Promotions</a></li>
+                    <li><a href="/news/">News</a></li>
+                </ul>
             </div>
-            <div>
-                <h4 style="font-size: 0.75rem; font-weight: 700; color: var(--text-dim); margin-bottom: 0.75rem; text-transform: uppercase;">Support</h4>
-                <a href="/help-center/" style="display: block; color: var(--text-dim); font-size: 0.875rem; margin-bottom: 0.5rem;">Help</a>
-                <a href="/responsible-gambling/" style="display: block; color: var(--text-dim); font-size: 0.875rem; margin-bottom: 0.5rem;">Responsible Gaming</a>
-                <a href="/terms-conditions/" style="display: block; color: var(--text-dim); font-size: 0.875rem;">Terms & Conditions</a>
+            <div class="footer__column">
+                <h4 class="footer__heading">Support</h4>
+                <ul class="footer__links">
+                    <li><a href="/help-center/">Help</a></li>
+                    <li><a href="/responsible-gambling/">Responsible Gaming</a></li>
+                    <li><a href="/terms-conditions/">Terms &amp; Conditions</a></li>
+                </ul>
             </div>
-            <div>
-                <h4 style="font-size: 0.75rem; font-weight: 700; color: var(--text-dim); margin-bottom: 0.75rem; text-transform: uppercase;">Site</h4>
-                <a href="/sitemap.xml" style="display: block; color: var(--text-dim); font-size: 0.875rem;">Sitemap</a>
+            <div class="footer__column">
+                <h4 class="footer__heading">Site</h4>
+                <ul class="footer__links">
+                    <li><a href="/sitemap.xml">Sitemap</a></li>
+                </ul>
             </div>
         </div>
-        <div style="padding-top: 1.5rem; border-top: 1px solid var(--border); font-size: 0.75rem; color: var(--text-muted);">
-            <p style="margin-bottom: 0.5rem;">18+ Gamble responsibly. Need help? Contact <a href="https://www.pagcor.ph/index.php" target="_blank" rel="noopener noreferrer" style="color: var(--accent);">PAGCOR</a> for regulatory information, or international support via <a href="https://www.gamblingtherapy.org" target="_blank" rel="noopener noreferrer" style="color: var(--accent);">Gambling Therapy</a>.</p>
-            <p>&copy; 2026 PH646 · ph646main.com</p>
+
+        <div class="footer__bottom">
+            <p class="footer__disclaimer">
+                18+ Gamble responsibly. Need help? Contact
+                <a href="https://www.pagcor.ph/index.php" target="_blank" rel="noopener noreferrer">PAGCOR</a>
+                for regulatory information, or international support via
+                <a href="https://www.gamblingtherapy.org" target="_blank" rel="noopener noreferrer">Gambling Therapy</a>.
+            </p>
+            <p class="footer__copyright">&copy; 2026 PH646 &mdash; ph646main.com</p>
         </div>
     </div>
 </footer>

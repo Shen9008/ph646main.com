@@ -1,10 +1,13 @@
-<button class="sidebar-toggle" aria-label="Open menu" type="button">☰</button>
+<button class="sidebar-toggle" aria-label="Open menu" type="button">
+    <svg class="sidebar-toggle__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+        <path d="M5 7h14M5 12h14M5 17h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+    </svg>
+</button>
 <aside class="sidebar">
     <div class="sidebar__logo">
-        <a href="/">
-            <span class="site-logo-placeholder" aria-hidden="true"></span>
-            <span class="site-logo-title">PH646</span>
-            <span class="site-logo-tag">Philippines</span>
+        <a href="/" class="sidebar__brand-link">
+            <img class="site-logo-img" src="/images/logo/logo-main.webp" alt="PH646 Philippines" width="160" height="48"
+                decoding="async">
         </a>
     </div>
     <nav class="sidebar__nav">
@@ -14,9 +17,24 @@
         <a href="/live-casino/" class="sidebar__link" data-nav="live-casino">Live Casino</a>
         <a href="/promotions/" class="sidebar__link" data-nav="promotions">Promotions</a>
         <a href="/about-us/" class="sidebar__link" data-nav="about-us">About</a>
+        <a href="/news/" class="sidebar__link" data-nav="news">News</a>
         <a href="/help-center/" class="sidebar__link" data-nav="help-center">Help</a>
-        <a href="/responsible-gambling/" class="sidebar__link" data-nav="responsible-gambling">Responsible Gaming</a>
-        <a href="/news/" class="sidebar__link" data-nav="news">Blog</a>
     </nav>
-    <a href="https://reffpa.com/L?tag=d_5501493m_1236c_&site=5501493&ad=1236" target="_blank" rel="noopener noreferrer" class="sidebar__cta">Open PH646 promos — match bonus &amp; spins</a>
+    <div class="sidebar__footer">
+        <a href="https://reffpa.com/L?tag=d_5501493m_1236c_&site=5501493&ad=1236" target="_blank"
+            rel="noopener noreferrer" class="sidebar__cta">
+            <span class="sidebar__cta-icon" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M20 12v10H4V12M2 7h20v5H2V7zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </span>
+            <span class="sidebar__cta-body">
+                <span class="sidebar__cta-title">Welcome offer</span>
+                <span class="sidebar__cta-desc">Match bonus &amp; spins · PH646 promos</span>
+            </span>
+            <span class="sidebar__cta-chevron" aria-hidden="true">&#8594;</span>
+        </a>
+    </div>
 </aside>
