@@ -10,7 +10,8 @@
     "build:blogs-json": "node scripts/build-blogs-json-from-news.js",
     "rebuild:news-articles": "node scripts/rebuild-news-articles.js",
     "sync": "node scripts/content-sync.js",
-    "sync:doctor": "node scripts/sync-doctor.js"
+    "sync:doctor": "node scripts/sync-doctor.js",
+    "backfill": "node scripts/backfill-internal-links.js"
   },
   "keywords": [
     "PH646",
