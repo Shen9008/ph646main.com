@@ -28,10 +28,16 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function sortPosts(blogs) {
+        if (typeof BlogLoader !== 'undefined' && BlogLoader.sortBlogPosts) {
+            return BlogLoader.sortBlogPosts(blogs);
+        }
         return blogs.slice().sort(function (a, b) {
             var tb = new Date(b.synced_at || b.published_date || 0).getTime();
             var ta = new Date(a.synced_at || a.published_date || 0).getTime();
             if (tb !== ta) return tb - ta;
+            var pubB = new Date(b.published_date || 0).getTime();
+            var pubA = new Date(a.published_date || 0).getTime();
+            if (pubB !== pubA) return pubB - pubA;
             return String(b.slug).localeCompare(String(a.slug));
         });
     }

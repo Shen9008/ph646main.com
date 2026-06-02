@@ -30,7 +30,8 @@ function getPostsSyncConfig(opts = {}) {
   if (rawKey === undefined || rawKey === null) {
     filterKey = DEFAULT_FILTER_KEY;
   } else {
-    filterKey = String(rawKey).trim();
+    const trimmed = String(rawKey).trim();
+    filterKey = trimmed || DEFAULT_FILTER_KEY;
   }
 
   const applySiteFilter = Boolean(siteDomain && !skipFilter && filterKey);
@@ -130,8 +131,37 @@ async function fetchPosts(opts = {}) {
   return allPosts;
 }
 
+/**
+ * Fail fast when CI requires a site filter (SYNC_REQUIRE_SITE_FILTER=1).
+ */
+function assertStrictSiteFilter() {
+  const required = /^1|true|yes$/i.test(String(process.env.SYNC_REQUIRE_SITE_FILTER || '').trim());
+  if (!required) return;
+
+  const cfg = getPostsSyncConfig();
+  const errors = [];
+
+  if (!cfg.siteDomain) {
+    errors.push('SITE_DOMAIN is empty — set repository variable SITE_DOMAIN (e.g. ph646main.com).');
+  }
+  if (cfg.skipFilter) {
+    errors.push('SKIP_POSTS_SITE_FILTER is enabled — must not run unfiltered sync in CI.');
+  }
+  if (!cfg.filterKey) {
+    errors.push('POSTS_SITE_FILTER_KEY is empty and no default filter key is available.');
+  }
+  if (cfg.siteDomain && !cfg.skipFilter && !cfg.applySiteFilter) {
+    errors.push('Site filter is not applied despite SITE_DOMAIN being set.');
+  }
+
+  if (errors.length) {
+    throw new Error(`Strict site filter required:\n  - ${errors.join('\n  - ')}`);
+  }
+}
+
 module.exports = {
   fetchPosts,
   getPostsSyncConfig,
   buildSamplePostsUrl,
+  assertStrictSiteFilter,
 };

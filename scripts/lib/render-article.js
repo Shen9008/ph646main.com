@@ -141,7 +141,9 @@ function renderArticle(normalized, opts = {}) {
   const templatePath = opts.templatePath || TEMPLATE_PATH;
   let template = fs.readFileSync(templatePath, 'utf8');
 
-  const siteOrigin = 'https://ph646main.com';
+  const siteOrigin = String(process.env.PUBLIC_SITE_ORIGIN || process.env.SITE_BASE_URL || 'https://ph646main.com')
+    .trim()
+    .replace(/\/$/, '');
   const baseUrl = `${siteOrigin}/blog/${normalized.slug}/`;
   const shareTitle = encodeURIComponent(normalized.title);
   const ogImage = `${siteOrigin}/images/hero-banners/hero-blog.webp`;

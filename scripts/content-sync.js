@@ -2,10 +2,11 @@
 
 const fs = require('fs');
 const path = require('path');
-const { fetchPosts } = require('./lib/fetch-posts.js');
+const { fetchPosts, assertStrictSiteFilter } = require('./lib/fetch-posts.js');
 const { normalizePost, validatePost } = require('./lib/normalize-post.js');
 const { renderArticle } = require('./lib/render-article.js');
 const { generateSitemap } = require('./lib/generate-sitemap.js');
+const { fingerprintFromStrapiPost, postNeedsRefresh } = require('./lib/content-fingerprint.js');
 
 const ROOT = path.resolve(__dirname, '..');
 const BLOGS_JSON_PATH = path.join(ROOT, 'assets/data/blogs.json');
@@ -14,21 +15,52 @@ const BLOGS_JSON_FIELDS = [
   'slug', 'title', 'meta_title', 'meta_description', 'focus_keyword',
   'category', 'search_intent', 'published_date', 'reading_time',
   'excerpt', 'placeholder_gradient', 'related_posts', 'keywords',
-  'synced_at', 'article_path',
+  'cms_updated_at', 'content_hash', 'synced_at', 'article_path',
 ];
 
-function sortBlogsByLatestSyncFirst(a, b) {
-  const tb = new Date(b.synced_at || b.published_date || 0).getTime();
-  const ta = new Date(a.synced_at || a.published_date || 0).getTime();
-  if (tb !== ta) return tb - ta;
+function parseArgs(argv) {
+  const flags = {
+    all: argv.includes('--all'),
+    daily: argv.includes('--daily'),
+    refresh: argv.includes('--refresh'),
+    force: argv.includes('--force'),
+    limit: null,
+  };
+  const limitIdx = argv.indexOf('--limit');
+  if (limitIdx !== -1 && argv[limitIdx + 1]) {
+    const n = parseInt(argv[limitIdx + 1], 10);
+    if (!Number.isNaN(n) && n > 0) flags.limit = n;
+  }
+  return flags;
+}
+
+/** Blog index order: latest sync first, then published_date, cms_updated_at, slug. */
+function sortBlogsForIndex(a, b) {
+  const syncB = new Date(b.synced_at || b.published_date || 0).getTime();
+  const syncA = new Date(a.synced_at || a.published_date || 0).getTime();
+  if (syncB !== syncA) return syncB - syncA;
+
+  const pubB = new Date(b.published_date || 0).getTime();
+  const pubA = new Date(a.published_date || 0).getTime();
+  if (pubB !== pubA) return pubB - pubA;
+
+  const cmsB = new Date(b.cms_updated_at || 0).getTime();
+  const cmsA = new Date(a.cms_updated_at || 0).getTime();
+  if (cmsB !== cmsA) return cmsB - cmsA;
+
   return String(b.slug).localeCompare(String(a.slug));
 }
 
-function toBlogsEntry(normalized) {
+function toBlogsEntry(normalized, strapiPost) {
   const entry = {};
   for (const k of BLOGS_JSON_FIELDS) {
     if (normalized[k] !== undefined) entry[k] = normalized[k];
   }
+  const fp = fingerprintFromStrapiPost(strapiPost);
+  entry.cms_updated_at = fp.cms_updated_at;
+  entry.content_hash = fp.content_hash;
+  entry.synced_at = new Date().toISOString();
+  entry.article_path = entry.article_path || 'blog';
   return entry;
 }
 
@@ -37,18 +69,23 @@ function getRelatedSlugs(blogs, currentSlug, opts = {}, limit = 3) {
   const category = (opts.category || '').toLowerCase();
   const others = blogs.filter((b) => b.slug !== currentSlug);
 
-  const sameIntent = others.filter((b) => (b.search_intent || '').toLowerCase() === searchIntent).sort(sortBlogsByLatestSyncFirst);
-  const sameIntentSlugs = new Set(sameIntent.map((b) => b.slug));
-  const sameCategory = others
-    .filter((b) => !sameIntentSlugs.has(b.slug) && category && (b.category || '').toLowerCase() === category)
-    .sort(sortBlogsByLatestSyncFirst);
-  const sameCategorySlugs = new Set(sameCategory.map((b) => b.slug));
-  const rest = others
-    .filter((b) => !sameIntentSlugs.has(b.slug) && !sameCategorySlugs.has(b.slug))
-    .sort(sortBlogsByLatestSyncFirst);
+  const byLatest = (list) => list.slice().sort(sortBlogsForIndex);
 
-  const merged = [...sameIntent, ...sameCategory, ...rest];
-  return merged.slice(0, limit).map((b) => b.slug);
+  const sameIntent = byLatest(
+    others.filter((b) => (b.search_intent || '').toLowerCase() === searchIntent),
+  );
+  const sameIntentSlugs = new Set(sameIntent.map((b) => b.slug));
+  const sameCategory = byLatest(
+    others.filter(
+      (b) => !sameIntentSlugs.has(b.slug) && category && (b.category || '').toLowerCase() === category,
+    ),
+  );
+  const sameCategorySlugs = new Set(sameCategory.map((b) => b.slug));
+  const rest = byLatest(
+    others.filter((b) => !sameIntentSlugs.has(b.slug) && !sameCategorySlugs.has(b.slug)),
+  );
+
+  return [...sameIntent, ...sameCategory, ...rest].slice(0, limit).map((b) => b.slug);
 }
 
 function loadBlogsJson() {
@@ -62,19 +99,22 @@ function loadBlogsJson() {
 }
 
 function saveBlogsJson(blogs) {
-  const json = JSON.stringify(blogs, null, 2);
-  fs.writeFileSync(BLOGS_JSON_PATH, json + '\n', 'utf8');
+  const sorted = blogs.slice().sort(sortBlogsForIndex);
+  fs.writeFileSync(BLOGS_JSON_PATH, JSON.stringify(sorted, null, 2) + '\n', 'utf8');
 }
 
-async function run() {
-  const all = process.argv.includes('--all');
-  const apiUrl = process.env.STRAPI_API_URL || 'http://localhost:1337/api';
+function buildApiBySlug(strapiPosts) {
+  const map = new Map();
+  for (const p of strapiPosts) {
+    const slug = p.slug || p.documentId || '';
+    if (slug) map.set(slug, p);
+  }
+  return map;
+}
 
-  console.log('Fetching posts from API...');
-  const strapiPosts = await fetchPosts({ baseUrl: apiUrl });
-
-  const existingBlogs = loadBlogsJson();
+function buildWorklist(flags, strapiPosts, existingBlogs) {
   const knownSlugs = new Set(existingBlogs.map((b) => b.slug));
+  const apiBySlug = buildApiBySlug(strapiPosts);
 
   const unprocessed = strapiPosts
     .filter((p) => {
@@ -83,40 +123,102 @@ async function run() {
     })
     .sort((a, b) => new Date(a.publishedAt || 0) - new Date(b.publishedAt || 0));
 
-  if (unprocessed.length === 0) {
-    console.log('No new articles to publish.');
+  const worklist = [];
+  const seen = new Set();
+
+  function add(raw, mode) {
+    const slug = raw.slug || raw.documentId || '';
+    if (!slug || seen.has(slug)) return;
+    seen.add(slug);
+    worklist.push({ raw, mode, slug });
+  }
+
+  if (flags.force) {
+    for (const raw of strapiPosts) add(raw, 'force');
+    return applyLimit(worklist, flags.limit);
+  }
+
+  if (!flags.force) {
+    let newLimit = 1;
+    if (flags.daily) newLimit = 1;
+    else if (flags.all || flags.refresh) newLimit = unprocessed.length;
+    const toCreate = unprocessed.slice(0, newLimit);
+    for (const raw of toCreate) add(raw, 'create');
+  }
+
+  const wantRefresh = (flags.refresh || flags.daily) && !flags.all;
+  if (wantRefresh) {
+    for (const entry of existingBlogs) {
+      const raw = apiBySlug.get(entry.slug);
+      if (!raw) continue;
+      if (postNeedsRefresh(entry, raw)) add(raw, 'refresh');
+    }
+  }
+
+  return applyLimit(worklist, flags.limit);
+}
+
+function applyLimit(worklist, limit) {
+  if (limit == null) return worklist;
+  return worklist.slice(0, limit);
+}
+
+function upsertBlogsEntry(blogs, entry) {
+  const idx = blogs.findIndex((b) => b.slug === entry.slug);
+  if (idx === -1) blogs.push(entry);
+  else blogs[idx] = { ...blogs[idx], ...entry };
+  return blogs;
+}
+
+function processOne(raw, blogs, mode) {
+  const slug = raw.slug || raw.documentId || '';
+  const related = getRelatedSlugs(blogs, slug, {
+    searchIntent: raw.search_intent,
+    category: raw.category,
+  });
+
+  const normalized = normalizePost(raw, { relatedPosts: related });
+  validatePost(normalized);
+
+  console.log(`  - [${mode}] ${normalized.title} (${slug})`);
+  renderArticle(normalized, { blogs });
+
+  const entry = toBlogsEntry(normalized, raw);
+  return upsertBlogsEntry(blogs, entry);
+}
+
+async function run() {
+  const flags = parseArgs(process.argv);
+  assertStrictSiteFilter();
+
+  const apiUrl = process.env.STRAPI_API_URL || 'http://localhost:1337/api';
+  const modeLabel = flags.force
+    ? 'force'
+    : flags.daily
+      ? 'daily'
+      : flags.refresh
+        ? 'refresh'
+        : flags.all
+          ? 'all-new'
+          : 'default';
+
+  console.log(`Fetching posts from API (mode: ${modeLabel})...`);
+  const strapiPosts = await fetchPosts({ baseUrl: apiUrl });
+
+  let blogs = loadBlogsJson();
+  const worklist = buildWorklist(flags, strapiPosts, blogs);
+
+  if (worklist.length === 0) {
+    console.log('No articles to publish or refresh.');
     return;
   }
 
-  const toProcess = all ? unprocessed : unprocessed.slice(0, 1);
-  console.log(`Publishing ${toProcess.length} article(s)...`);
+  console.log(`Processing ${worklist.length} article(s)...`);
 
-  let blogs = [...existingBlogs];
-  const allSlugs = blogs.map((b) => b.slug);
-
-  for (const raw of toProcess) {
-    const slug = raw.slug || raw.documentId || '';
-    const related = getRelatedSlugs(blogs, slug, {
-      searchIntent: raw.search_intent,
-      category: raw.category,
-    });
-
-    const normalized = normalizePost(raw, {
-      relatedPosts: related,
-    });
-    validatePost(normalized);
-
-    console.log(`  - ${normalized.title} (${slug})`);
-    renderArticle(normalized, { blogs });
-
-    const entry = toBlogsEntry(normalized);
-    entry.synced_at = new Date().toISOString();
-    entry.article_path = 'blog';
-    blogs.push(entry);
-    allSlugs.push(slug);
+  for (const item of worklist) {
+    blogs = processOne(item.raw, blogs, item.mode);
   }
 
-  blogs.sort(sortBlogsByLatestSyncFirst);
   saveBlogsJson(blogs);
   generateSitemap();
   console.log('Done. blogs.json and sitemap.xml updated.');
