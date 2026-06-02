@@ -7,6 +7,7 @@ const { normalizePost, validatePost } = require('./lib/normalize-post.js');
 const { renderArticle } = require('./lib/render-article.js');
 const { generateSitemap } = require('./lib/generate-sitemap.js');
 const { fingerprintFromStrapiPost, postNeedsRefresh } = require('./lib/content-fingerprint.js');
+const { sortBlogsForIndex } = require('./lib/sort-blogs.js');
 
 const ROOT = path.resolve(__dirname, '..');
 const BLOGS_JSON_PATH = path.join(ROOT, 'assets/data/blogs.json');
@@ -32,23 +33,6 @@ function parseArgs(argv) {
     if (!Number.isNaN(n) && n > 0) flags.limit = n;
   }
   return flags;
-}
-
-/** Blog index order: latest sync first, then published_date, cms_updated_at, slug. */
-function sortBlogsForIndex(a, b) {
-  const syncB = new Date(b.synced_at || b.published_date || 0).getTime();
-  const syncA = new Date(a.synced_at || a.published_date || 0).getTime();
-  if (syncB !== syncA) return syncB - syncA;
-
-  const pubB = new Date(b.published_date || 0).getTime();
-  const pubA = new Date(a.published_date || 0).getTime();
-  if (pubB !== pubA) return pubB - pubA;
-
-  const cmsB = new Date(b.cms_updated_at || 0).getTime();
-  const cmsA = new Date(a.cms_updated_at || 0).getTime();
-  if (cmsB !== cmsA) return cmsB - cmsA;
-
-  return String(b.slug).localeCompare(String(a.slug));
 }
 
 function toBlogsEntry(normalized, strapiPost) {

@@ -8,8 +8,10 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!grid || !paginationEl) return;
 
     var PAGE_SIZE = 8;
-    var DATA_URL = '../assets/data/blogs.json';
+    var FEATURED_COUNT = 3;
+    var DATA_URL = '../assets/data/blogs.json?v=sync-sort-2';
     var FALLBACK_IMG = '../images/hero-banners/hero-blog.webp';
+    var featuredGrid = document.getElementById('news-hub-featured-grid');
 
     function escapeHtml(s) {
         if (s == null) return '';
@@ -45,9 +47,17 @@ document.addEventListener('DOMContentLoaded', function () {
         if (typeof BlogLoader !== 'undefined' && BlogLoader.prepareBlogIndex) {
             return BlogLoader.prepareBlogIndex(posts);
         }
+        if (typeof BlogLoader !== 'undefined' && BlogLoader.sortBlogPosts) {
+            return BlogLoader.sortBlogPosts(posts);
+        }
+        function syncTime(p) {
+            if (!p || !p.synced_at) return 0;
+            var t = new Date(p.synced_at).getTime();
+            return isNaN(t) ? 0 : t;
+        }
         return posts.slice().sort(function (a, b) {
-            var tb = new Date(b.synced_at || b.published_date || 0).getTime();
-            var ta = new Date(a.synced_at || a.published_date || 0).getTime();
+            var tb = syncTime(b);
+            var ta = syncTime(a);
             if (tb !== ta) return tb - ta;
             var pubB = new Date(b.published_date || 0).getTime();
             var pubA = new Date(a.published_date || 0).getTime();
@@ -63,18 +73,26 @@ document.addEventListener('DOMContentLoaded', function () {
         return n;
     }
 
-    function renderCard(post) {
+    function formatSyncMeta(post) {
+        if (post.synced_at) {
+            var d = formatMetaDate(post.synced_at);
+            if (d) return 'Synced ' + d;
+        }
+        return formatMetaDate(post.published_date) || escapeHtml(post.reading_time || '');
+    }
+
+    function renderCard(post, featured) {
         var href = articleHref(post);
         var imgSrc = cardImageSrc(post);
         var title = escapeHtml(post.title);
         var excerpt = escapeHtml(post.excerpt || '');
         var cat = escapeHtml(post.category || 'Guide');
-        var meta = formatMetaDate(post.published_date);
-        if (!meta && post.reading_time) meta = escapeHtml(post.reading_time);
+        var meta = formatSyncMeta(post);
+        var cardClass = featured ? 'news-card news-card--featured' : 'news-card';
 
         return (
             '<a href="' + href + '">' +
-            '<article class="news-card" data-animate>' +
+            '<article class="' + cardClass + '" data-animate>' +
             '<div class="news-card__image"><img src="' + escapeHtml(imgSrc) + '" alt="' + title + '" decoding="async" width="640" height="360" loading="lazy" onerror="this.onerror=null;this.src=\'' + FALLBACK_IMG + '\'"></div>' +
             '<div class="news-card__content">' +
             '<span class="news-card__category">' + cat + '</span>' +
@@ -211,9 +229,16 @@ document.addEventListener('DOMContentLoaded', function () {
                         : total + ' guides — payments, slots, sports, bonuses and responsible play';
             }
 
+            if (featuredGrid) {
+                featuredGrid.innerHTML = sorted
+                    .slice(0, FEATURED_COUNT)
+                    .map(function (p) { return renderCard(p, true); })
+                    .join('');
+            }
+
             var slice = sorted.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
             grid.classList.toggle('news-hub__grid--single', total === 1);
-            grid.innerHTML = slice.map(renderCard).join('');
+            grid.innerHTML = slice.map(function (p) { return renderCard(p, false); }).join('');
             if (errEl) errEl.hidden = true;
             renderPagination(page, totalPages);
             scrollToAllGuidesSection();
@@ -222,6 +247,10 @@ document.addEventListener('DOMContentLoaded', function () {
             grid.innerHTML = '';
             grid.classList.remove('news-hub__grid--single');
             paginationEl.hidden = true;
+            if (featuredGrid) {
+                featuredGrid.innerHTML =
+                    '<p class="news-hub__guides-error">Featured guides unavailable right now.</p>';
+            }
             if (countEl) countEl.textContent = 'Guides unavailable right now';
             if (errEl) {
                 errEl.hidden = false;

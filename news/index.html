@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="../css/style.css">
     <script defer src="../js/load-partials.js"></script>
     <script defer src="../js/main.js"></script>
-    <script defer src="../js/blog-loader.js"></script>
+    <script src="../js/blog-loader.js"></script>
     <script defer src="../js/news-hub.js"></script>
 
     <script type="application/ld+json">
@@ -91,42 +91,10 @@
             <div class="layout-main">
                 <div class="section__header news-hub__section-header">
                     <h2 class="section__title">Featured picks</h2>
-                    <p class="section__subtitle">Start with our most-read guides</p>
+                    <p class="section__subtitle">Latest synced guides</p>
                 </div>
-                <div class="news-hub__featured-grid cards-grid">
-                    <a href="best-online-casinos-australia-2025/">
-                    <article class="news-card news-card--featured" data-animate>
-                        <div class="news-card__image"><img src="../images/news/best-online-casinos-australia-2025.webp" alt="Best online casinos Australia 2025" decoding="async" width="640" height="360"></div>
-                        <div class="news-card__content">
-                            <span class="news-card__category">Casino Guide</span>
-                            <h3 class="news-card__title">Best Online Casinos Australia 2025</h3>
-                            <p class="news-card__excerpt">Compare bonuses, pokies, live casino and safety for Filipino players.</p>
-                            <span class="news-card__meta">Updated Feb 2025</span>
-                        </div>
-                    </article>
-                    </a>
-                    <a href="online-pokies-australia-guide/">
-                    <article class="news-card news-card--featured" data-animate>
-                        <div class="news-card__image"><img src="../images/news/online-pokies-australia.webp" alt="Online slots Philippines guide" decoding="async" width="640" height="360"></div>
-                        <div class="news-card__content">
-                            <span class="news-card__category">Slots Guide</span>
-                            <h3 class="news-card__title">Online slots Philippines – Complete Guide</h3>
-                            <p class="news-card__excerpt">RTP, volatility, sites and how to play real-money pokies.</p>
-                            <span class="news-card__meta">Updated Feb 2025</span>
-                        </div>
-                    </article>
-                    </a>
-                    <a href="live-casino-australia-guide/">
-                    <article class="news-card news-card--featured" data-animate>
-                        <div class="news-card__image"><img src="../images/news/live-casino-australia-guide.webp" alt="Live casino Australia guide" decoding="async" width="640" height="360"></div>
-                        <div class="news-card__content">
-                            <span class="news-card__category">Live Casino</span>
-                            <h3 class="news-card__title">Live Casino Australia Guide 2025</h3>
-                            <p class="news-card__excerpt">Real dealers, blackjack, roulette and baccarat around the clock.</p>
-                            <span class="news-card__meta">Updated Feb 2025</span>
-                        </div>
-                    </article>
-                    </a>
+                <div class="news-hub__featured-grid cards-grid" id="news-hub-featured-grid" aria-live="polite">
+                    <p class="news-hub__guides-error">Loading featured guides&hellip;</p>
                 </div>
             </div>
             <div id="partial-sidebar"></div>

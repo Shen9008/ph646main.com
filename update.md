@@ -94,12 +94,14 @@ The API does **not** add same-site blog links. Local injection skips text alread
 
 Guides on the **News hub** (`/news/`), **sidebar “latest”** on blog articles, and the order of rows in **`assets/data/blogs.json`** after each sync use the same rules (`js/blog-loader.js`, `scripts/content-sync.js`):
 
-1. **`synced_at` newest first** (latest sync → older) — newly published or refreshed posts surface at the top
-2. **`published_date`** (newest first) — tiebreaker when sync times match or `synced_at` is missing
+1. **`synced_at` newest first** (latest sync → older) — only this field drives primary order; newly published or refreshed posts surface at the top
+2. **`published_date`** (newest first) — tiebreaker when two posts share the same `synced_at` (e.g. bulk-imported news guides)
 3. **`cms_updated_at`** (newest first)
 4. **`slug`** (alphabetical, descending)
 
-Posts without `synced_at` (legacy rows) fall back to `published_date` for ordering until the next sync sets `synced_at`.
+Posts **without** `synced_at` sort to the **end** of the list (not by `published_date` as a stand-in for sync time). Run `npm run sync` / daily sync to set `synced_at` on Strapi-backed posts.
+
+**News hub UI:** `/news/` loads `blog-loader.js` (non-deferred, before `news-hub.js`), sorts `blogs.json` client-side, fills **Featured picks** with the top 3 by `synced_at`, and lists **All guides** in the same order. Fetch uses `?v=sync-sort-2` to avoid stale CDN/browser cache.
 
 ---
 

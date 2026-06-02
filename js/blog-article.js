@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var depth = segments.length;
     var baseToRoot = depth > 0 ? Array(depth + 1).join('../') : '';
 
-    var dataUrl = baseToRoot + 'assets/data/blogs.json';
+    var dataUrl = baseToRoot + 'assets/data/blogs.json?v=sync-sort-2';
 
     function postHref(post) {
         if (post.article_path === 'blog') {
@@ -31,9 +31,14 @@ document.addEventListener('DOMContentLoaded', function () {
         if (typeof BlogLoader !== 'undefined' && BlogLoader.sortBlogPosts) {
             return BlogLoader.sortBlogPosts(blogs);
         }
+        function syncTime(p) {
+            if (!p || !p.synced_at) return 0;
+            var t = new Date(p.synced_at).getTime();
+            return isNaN(t) ? 0 : t;
+        }
         return blogs.slice().sort(function (a, b) {
-            var tb = new Date(b.synced_at || b.published_date || 0).getTime();
-            var ta = new Date(a.synced_at || a.published_date || 0).getTime();
+            var tb = syncTime(b);
+            var ta = syncTime(a);
             if (tb !== ta) return tb - ta;
             var pubB = new Date(b.published_date || 0).getTime();
             var pubA = new Date(a.published_date || 0).getTime();
