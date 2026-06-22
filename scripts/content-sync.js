@@ -53,7 +53,7 @@ function getRelatedSlugs(blogs, currentSlug, opts = {}, limit = 3) {
   const category = (opts.category || '').toLowerCase();
   const others = blogs.filter((b) => b.slug !== currentSlug);
 
-  const byLatest = (list) => list.slice().sort(sortBlogsForIndex);
+  const byLatest = (list) => sortBlogsForIndex(list);
 
   const sameIntent = byLatest(
     others.filter((b) => (b.search_intent || '').toLowerCase() === searchIntent),
@@ -83,7 +83,7 @@ function loadBlogsJson() {
 }
 
 function saveBlogsJson(blogs) {
-  const sorted = blogs.slice().sort(sortBlogsForIndex);
+  const sorted = sortBlogsForIndex(blogs);
   fs.writeFileSync(BLOGS_JSON_PATH, JSON.stringify(sorted, null, 2) + '\n', 'utf8');
 }
 
