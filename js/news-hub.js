@@ -3,7 +3,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     var grid = document.getElementById('news-hub-all-guides');
     var paginationEl = document.getElementById('news-hub-pagination');
-    var countEl = document.getElementById('news-hub-all-guides-count');
     var errEl = document.getElementById('news-hub-all-guides-error');
     if (!grid || !paginationEl) return;
 
@@ -76,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function formatSyncMeta(post) {
         if (post.synced_at) {
             var d = formatMetaDate(post.synced_at);
-            if (d) return 'Synced ' + d;
+            if (d) return d;
         }
         return formatMetaDate(post.published_date) || escapeHtml(post.reading_time || '');
     }
@@ -222,13 +221,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
 
-            if (countEl) {
-                countEl.textContent =
-                    total === 1
-                        ? '1 guide — payments, slots, sports, bonuses and responsible play'
-                        : total + ' guides — payments, slots, sports, bonuses and responsible play';
-            }
-
             if (featuredGrid) {
                 featuredGrid.innerHTML = sorted
                     .slice(0, FEATURED_COUNT)
@@ -251,7 +243,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 featuredGrid.innerHTML =
                     '<p class="news-hub__guides-error">Featured guides unavailable right now.</p>';
             }
-            if (countEl) countEl.textContent = 'Guides unavailable right now';
             if (errEl) {
                 errEl.hidden = false;
             }

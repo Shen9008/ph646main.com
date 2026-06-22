@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { sortBlogsForIndex, compareBlogPosts } = require('./lib/sort-blogs.js');
 
 const ROOT = path.resolve(__dirname, '..');
 const NEWS_DIR = path.join(ROOT, 'news');
@@ -10,21 +11,14 @@ const OUT = path.join(ROOT, 'assets', 'data', 'blogs.json');
 const PLACEHOLDER_GRADIENT =
   'linear-gradient(135deg, rgba(212,175,55,0.18) 0%, rgba(212,175,55,0.05) 55%, #0a0a0a 100%)';
 
-function sortByPublishedDesc(a, b) {
-  const tb = new Date(b.published_date || 0).getTime();
-  const ta = new Date(a.published_date || 0).getTime();
-  if (tb !== ta) return tb - ta;
-  return String(a.slug).localeCompare(String(b.slug));
-}
-
 function getRelatedSlugs(blogs, currentSlug, category, limit = 3) {
   const cat = (category || '').toLowerCase();
   const others = blogs.filter((b) => b.slug !== currentSlug);
   const sameCat = others
     .filter((b) => (b.category || '').toLowerCase() === cat)
-    .sort(sortByPublishedDesc);
+    .sort(compareBlogPosts);
   const used = new Set(sameCat.map((b) => b.slug));
-  const rest = others.filter((b) => !used.has(b.slug)).sort(sortByPublishedDesc);
+  const rest = others.filter((b) => !used.has(b.slug)).sort(compareBlogPosts);
   return [...sameCat, ...rest].slice(0, limit).map((b) => b.slug);
 }
 
@@ -100,10 +94,8 @@ function main() {
     b.related_posts = getRelatedSlugs(blogs, b.slug, b.category);
   }
 
-  blogs.sort(sortByPublishedDesc);
-
   fs.mkdirSync(path.dirname(OUT), { recursive: true });
-  fs.writeFileSync(OUT, JSON.stringify(blogs, null, 2) + '\n', 'utf8');
+  fs.writeFileSync(OUT, JSON.stringify(sortBlogsForIndex(blogs), null, 2) + '\n', 'utf8');
   console.log(`Wrote ${blogs.length} entries to ${path.relative(ROOT, OUT)}`);
 }
 
