@@ -543,6 +543,7 @@ body.layout-v2 .sidebar__cta:focus-visible {
     overflow: hidden;
 }
 .tile__img img {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;

@@ -1,3 +1,6 @@
+# Slot thumbs: Cloudflare is case-sensitive (/images/slot/ 404s, /images/Slot/ exists).
+/images/slot/* /images/game-thumbs/:splat 200
+
 # Canonical URL normalization - prevent "Page with redirect" / "Redirect error" in Google
 # All canonicals use trailing slash. Redirect non-canonical variants to canonical (301).
 
