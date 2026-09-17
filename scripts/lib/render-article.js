@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const { normalizePost, validatePost } = require('./normalize-post.js');
 const { injectInternalLinks } = require('./inject-internal-links.js');
+const { injectChrome } = require('./inline-chrome');
 
 const ROOT = path.resolve(__dirname, '../..');
 const TEMPLATE_PATH = path.join(ROOT, 'scripts/templates/article.template.html');
@@ -200,7 +201,7 @@ function renderArticle(normalized, opts = {}) {
   const outDir = path.join(BLOG_DIR, normalized.slug);
   const outPath = path.join(outDir, 'index.html');
   fs.mkdirSync(outDir, { recursive: true });
-  fs.writeFileSync(outPath, template, 'utf8');
+  fs.writeFileSync(outPath, injectChrome(template), 'utf8');
 
   return outPath;
 }

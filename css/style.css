@@ -693,6 +693,7 @@ h4 {
 }
 
 .game-strip__img img {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -952,7 +953,8 @@ h4 {
 
 .game-card__image {
     position: relative;
-    aspect-ratio: 16/10;
+    aspect-ratio: 16 / 10;
+    width: 100%;
     background: var(--secondary-dark);
     overflow: hidden;
 }

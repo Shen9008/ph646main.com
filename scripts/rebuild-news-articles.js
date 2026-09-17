@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { injectChrome } = require('./lib/inline-chrome');
 
 const ROOT = path.resolve(__dirname, '..');
 const NEWS_DIR = path.join(ROOT, 'news');
@@ -95,7 +96,7 @@ function main() {
     if (!fs.existsSync(file)) continue;
     let html = fs.readFileSync(file, 'utf8');
     if (!html.includes('blog-article__content')) continue;
-    const out = rebuildHtml(html);
+    const out = injectChrome(rebuildHtml(html));
     fs.writeFileSync(file, out, 'utf8');
     n += 1;
     console.log('rebuilt', slug);

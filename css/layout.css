@@ -3,6 +3,22 @@
 @import url('./variables.css');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
 
+.skip-link {
+    position: absolute;
+    left: 0.75rem;
+    top: -100px;
+    z-index: 10000;
+    padding: 0.5rem 1rem;
+    background: var(--accent, #e6b800);
+    color: #121218;
+    font-weight: 700;
+    border-radius: 0.25rem;
+    text-decoration: none;
+}
+.skip-link:focus {
+    top: 0.75rem;
+}
+
 /* Layout shell — dark grey base + animated sparkle field behind content */
 body.layout-v2 {
     font-family: var(--font-primary);

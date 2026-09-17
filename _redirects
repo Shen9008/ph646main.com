@@ -1,3 +1,19 @@
+# Thin leftover AU news (under 100 words) → PH money pages
+/news/live-casino-australia-guide /live-casino/ 301
+/news/live-casino-australia-guide/ /live-casino/ 301
+/news/live-casino-australia-guide/index.html /live-casino/ 301
+/news/live-casino-australia-guide.html /live-casino/ 301
+/news/online-pokies-australia-guide /slots/ 301
+/news/online-pokies-australia-guide/ /slots/ 301
+/news/online-pokies-australia-guide/index.html /slots/ 301
+/news/online-pokies-australia-guide.html /slots/ 301
+/blog/live-casino-australia-guide /live-casino/ 301
+/blog/live-casino-australia-guide/ /live-casino/ 301
+/blog/live-casino-australia-guide/index.html /live-casino/ 301
+/blog/online-pokies-australia-guide /slots/ 301
+/blog/online-pokies-australia-guide/ /slots/ 301
+/blog/online-pokies-australia-guide/index.html /slots/ 301
+
 # Slot thumbs: Cloudflare is case-sensitive (/images/slot/ 404s, /images/Slot/ exists).
 /images/slot/* /images/game-thumbs/:splat 200
 
@@ -34,8 +50,6 @@
 
 # News articles - trailing slash (no slash to canonical with slash)
 /news/best-online-casinos-australia-2025 /news/best-online-casinos-australia-2025/ 301
-/news/online-pokies-australia-guide /news/online-pokies-australia-guide/ 301
-/news/live-casino-australia-guide /news/live-casino-australia-guide/ 301
 /news/sports-betting-australia-guide /news/sports-betting-australia-guide/ 301
 /news/casino-bonuses-australia-explained /news/casino-bonuses-australia-explained/ 301
 /news/safe-online-gambling-australia /news/safe-online-gambling-australia/ 301
@@ -60,8 +74,6 @@
 /terms-conditions.html /terms-conditions/ 301
 /table-games.html /table-games/ 301
 /news/best-online-casinos-australia-2025.html /news/best-online-casinos-australia-2025/ 301
-/news/online-pokies-australia-guide.html /news/online-pokies-australia-guide/ 301
-/news/live-casino-australia-guide.html /news/live-casino-australia-guide/ 301
 /news/sports-betting-australia-guide.html /news/sports-betting-australia-guide/ 301
 /news/casino-bonuses-australia-explained.html /news/casino-bonuses-australia-explained/ 301
 /news/safe-online-gambling-australia.html /news/safe-online-gambling-australia/ 301
